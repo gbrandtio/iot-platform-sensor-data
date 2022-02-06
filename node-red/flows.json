@@ -1,0 +1,3744 @@
+[
+    {
+        "id": "bae15abd2e51cc2b",
+        "type": "tab",
+        "label": "Flow 4",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "987af68dd8e8a65f",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "Volos",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 90,
+        "y": 500,
+        "wires": [
+            [
+                "41d1981ff2899380",
+                "cd37e859c0ba17a1"
+            ]
+        ]
+    },
+    {
+        "id": "41d1981ff2899380",
+        "type": "http request",
+        "z": "bae15abd2e51cc2b",
+        "name": "Request to sensor 48109",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://data.sensor.community/airrohr/v1/sensor/48109/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 310,
+        "y": 380,
+        "wires": [
+            [
+                "8cc2d19729cb8633",
+                "bfeec6c177c2a526",
+                "3974bd3eb71cd7fa",
+                "7a54d036c1a9a4ca",
+                "1e79170b92394141"
+            ]
+        ]
+    },
+    {
+        "id": "8cc2d19729cb8633",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "Volos temp-hum-press",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 680,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "3974bd3eb71cd7fa",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get hum",
+        "func": "return {payload : msg.payload[0].sensordatavalues[2].value}; \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 420,
+        "wires": [
+            [
+                "937703e564490855",
+                "cbaecb0f9f356cc7"
+            ]
+        ]
+    },
+    {
+        "id": "bfeec6c177c2a526",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get temp",
+        "func": "return {payload : msg.payload[0].sensordatavalues[1].value};   \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 360,
+        "wires": [
+            [
+                "d54c9a1e192ef7ad",
+                "d481193f8ced0243"
+            ]
+        ]
+    },
+    {
+        "id": "7a54d036c1a9a4ca",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get press",
+        "func": "return {payload : msg.payload[0].sensordatavalues[3].value}; \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 480,
+        "wires": [
+            [
+                "9e5f4175ebb21396",
+                "01c7cfc38ab52f8c"
+            ]
+        ]
+    },
+    {
+        "id": "d54c9a1e192ef7ad",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print temp",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "937703e564490855",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print hum",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "9e5f4175ebb21396",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print press",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1290,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "d481193f8ced0243",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Volos temperature",
+        "group": "e17e8877716d480e",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Temperature",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cf1717",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#cf1717",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1150,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cbaecb0f9f356cc7",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Volos Humidity",
+        "group": "e17e8877716d480e",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Humidity",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cf1717",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1140,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "01c7cfc38ab52f8c",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Volos Pressure",
+        "group": "e17e8877716d480e",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "label": "Pressure",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cf1717",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#6915b7",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1140,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cd37e859c0ba17a1",
+        "type": "http request",
+        "z": "bae15abd2e51cc2b",
+        "name": "Request to sensor 48108",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://data.sensor.community/airrohr/v1/sensor/48108/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 310,
+        "y": 620,
+        "wires": [
+            [
+                "b77e923d33e09b37",
+                "b3067863e535d394",
+                "2cce42aabb4ce515",
+                "6faa5f8462a3b009"
+            ]
+        ]
+    },
+    {
+        "id": "b77e923d33e09b37",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "Volos PM2.5 -PM10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 700,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "b3067863e535d394",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get PM 2.5",
+        "func": "return {payload : msg.payload[0].sensordatavalues[0].value}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 660,
+        "wires": [
+            [
+                "19bd3e3c8bedc2f2",
+                "c7c7a5d6421af535"
+            ]
+        ]
+    },
+    {
+        "id": "2cce42aabb4ce515",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get PM 10",
+        "func": "return {payload : msg.payload[0].sensordatavalues[1].value}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 720,
+        "wires": [
+            [
+                "95cb18f5cc51bcd8",
+                "fc5b2961f2c3f90c"
+            ]
+        ]
+    },
+    {
+        "id": "19bd3e3c8bedc2f2",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print PM2.5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "95cb18f5cc51bcd8",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print PM10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "c7c7a5d6421af535",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Volos PM 2.5",
+        "group": "65acb63e3f173c28",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "PM 2.5",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff9500",
+            "#2911df",
+            "#f07000",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1150,
+        "y": 680,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fc5b2961f2c3f90c",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Volos PM 10",
+        "group": "65acb63e3f173c28",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "label": "PM 10",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff9500",
+            "#aec7e8",
+            "#ff7700",
+            "#18b918",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1150,
+        "y": 740,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "11d4b53111af11b9",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "Kriti ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 110,
+        "y": 1040,
+        "wires": [
+            [
+                "6ecea278350ad31d",
+                "a822a9fc8adc2604"
+            ]
+        ]
+    },
+    {
+        "id": "a822a9fc8adc2604",
+        "type": "http request",
+        "z": "bae15abd2e51cc2b",
+        "name": "Request to sensor 68877",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://data.sensor.community/airrohr/v1/sensor/68877/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 350,
+        "y": 940,
+        "wires": [
+            [
+                "3ee19ff71b324ab8",
+                "6db599a92d8e946c",
+                "491a56d02df2bf18",
+                "b4b4e70da5da8700",
+                "f3daf011ddf6a1ad",
+                "6931a53d4fb50b54"
+            ]
+        ]
+    },
+    {
+        "id": "6ecea278350ad31d",
+        "type": "http request",
+        "z": "bae15abd2e51cc2b",
+        "name": "Request to sensor 68876",
+        "method": "GET",
+        "ret": "obj",
+        "paytoqs": "ignore",
+        "url": "https://data.sensor.community/airrohr/v1/sensor/68876/",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "authType": "",
+        "senderr": false,
+        "x": 350,
+        "y": 1140,
+        "wires": [
+            [
+                "362c485c94ae4977",
+                "a7acc6ae6e161cfc",
+                "ade78ae8d79a62de",
+                "63babec3f8d99b54",
+                "a3cb9ddcca3c553b"
+            ]
+        ]
+    },
+    {
+        "id": "3ee19ff71b324ab8",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "Palaioxora temp-hum-press",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "362c485c94ae4977",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "Palaioxora PM2.5 PM10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "6db599a92d8e946c",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get temperature",
+        "func": "return {payload : msg.payload[0].sensordatavalues[0].value}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 860,
+        "wires": [
+            [
+                "e6054354e97ef946",
+                "4e0c7cbb31541697"
+            ]
+        ]
+    },
+    {
+        "id": "491a56d02df2bf18",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get humidity",
+        "func": "return {payload : msg.payload[0].sensordatavalues[2].value}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 920,
+        "wires": [
+            [
+                "41b268973ac59bff",
+                "c272627a62c4742b"
+            ]
+        ]
+    },
+    {
+        "id": "b4b4e70da5da8700",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get pressure",
+        "func": "return {payload : msg.payload[0].sensordatavalues[1].value}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 980,
+        "wires": [
+            [
+                "2fc142bac7556662",
+                "7a4735b8b266df15"
+            ]
+        ]
+    },
+    {
+        "id": "a7acc6ae6e161cfc",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get PM2.5",
+        "func": "return {payload : msg.payload[0].sensordatavalues[1].value}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 1160,
+        "wires": [
+            [
+                "70db415c098ec025",
+                "08ebcb3da510e4c3"
+            ]
+        ]
+    },
+    {
+        "id": "ade78ae8d79a62de",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get PM10",
+        "func": "return {payload : msg.payload[0].sensordatavalues[0].value}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 1220,
+        "wires": [
+            [
+                "e53a3fb224936bc7",
+                "8689292f2c4f7e89"
+            ]
+        ]
+    },
+    {
+        "id": "e6054354e97ef946",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print temperature",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 990,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "41b268973ac59bff",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print humidity",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1210,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "2fc142bac7556662",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print pressure",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1420,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "70db415c098ec025",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print PM 2.5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 950,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "e53a3fb224936bc7",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print PM 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "4e0c7cbb31541697",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Kriti temperature",
+        "group": "32e58e0576ddecf5",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Temperature",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cf1717",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1220,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c272627a62c4742b",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Kriti humidity",
+        "group": "32e58e0576ddecf5",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Humidity",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cf1717",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1210,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7a4735b8b266df15",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Kriti pressure",
+        "group": "32e58e0576ddecf5",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "label": "Pressure",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cf1717",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1210,
+        "y": 1020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "08ebcb3da510e4c3",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Kriti PM2.5",
+        "group": "12d195b722024a33",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "PM 2.5",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff9500",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1150,
+        "y": 1160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8689292f2c4f7e89",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "Kriti PM 10",
+        "group": "12d195b722024a33",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "label": "PM 10",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#ff9500",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1150,
+        "y": 1220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0012f72f0af84f75",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "create table Volos(TIMESTAMP INT PRIMARY KEY NOT NULL, TEMPERATURE VARCHAR(), HUMIDITY VARCHAR(), PRESSURE VARCHAR(),PM25 VARCHAR(),PM10 VARCHAR)",
+        "name": "",
+        "x": 490,
+        "y": 40,
+        "wires": [
+            [
+                "d994a46b81f9fb0b"
+            ]
+        ]
+    },
+    {
+        "id": "d994a46b81f9fb0b",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "53f9f9ab911c0ea3",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "create table Volos thp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "CREATE TABLE Volos( TIMESTAMP INT PRIMARY KEY NOT NULL , TEMPERATURE DOUBLE, HUMIDITY DOUBLE , PRESSURE DOUBLE);",
+        "payloadType": "date",
+        "x": 140,
+        "y": 40,
+        "wires": [
+            [
+                "0012f72f0af84f75"
+            ]
+        ]
+    },
+    {
+        "id": "2925c703a998b493",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "create table thp Kriti",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "create table Kriti( TIMESTAMP INT PRIMARY KEY NOT NULL , TEMPERATURE DOUBLE, HUMIDITY DOUBLE , PRESSURE DOUBLE);",
+        "payloadType": "date",
+        "x": 170,
+        "y": 1460,
+        "wires": [
+            [
+                "aa39f56c3896eaf4"
+            ]
+        ]
+    },
+    {
+        "id": "f3daf011ddf6a1ad",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print temps k",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 710,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "63babec3f8d99b54",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "print pms k",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 1280,
+        "wires": []
+    },
+    {
+        "id": "6931a53d4fb50b54",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get get temp-hum-pres",
+        "func": "var temp = msg.payload[0].sensordatavalues[0].value;\nvar hum = msg.payload[0].sensordatavalues[2].value;\nvar pres = msg.payload[0].sensordatavalues[1].value;\n\nvar temperature =parseFloat(temp);\nvar humidity = parseFloat(hum);\nvar pressure = parseFloat(pres);\n\n//var time = msg.payload[0].timestamp;\n//var time =12345478;\nvar seconds = new Date().getTime() / 1000;\n\nvar newMsg = {\n    \"topic\": \"INSERT INTO Kriti VALUES (\" + seconds + \",\"  + temperature + \",\" + humidity + \",\" + pressure + \")\"\n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1340,
+        "wires": [
+            [
+                "fb3c3c20e363ead4",
+                "aa39f56c3896eaf4"
+            ]
+        ]
+    },
+    {
+        "id": "a3cb9ddcca3c553b",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get pms",
+        "func": "var p25 = msg.payload[0].sensordatavalues[1].value;\nvar p10 = msg.payload[0].sensordatavalues[0].value;\n\nvar pm25 = parseFloat(p25);\nvar pm10 = parseFloat(p10);\n\n//var time = 1234556;\nvar seconds = new Date().getTime() / 1000;\n\nvar newMsg = {\n    \"topic\": \"INSERT INTO KritiPM VALUES (\" + seconds + \",\"  + pm25 + \",\" + pm10 + \")\"\n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 1340,
+        "wires": [
+            [
+                "2c325e134aa8df42",
+                "621618b52a96e40c"
+            ]
+        ]
+    },
+    {
+        "id": "fb3c3c20e363ead4",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "test1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 490,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "aa39f56c3896eaf4",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 650,
+        "y": 1520,
+        "wires": [
+            [
+                "7be9eba1dfc52740"
+            ]
+        ]
+    },
+    {
+        "id": "7a07f21990e5173d",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "Get values from Kriti thp",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from Kriti",
+        "payloadType": "date",
+        "x": 180,
+        "y": 1520,
+        "wires": [
+            [
+                "aa39f56c3896eaf4"
+            ]
+        ]
+    },
+    {
+        "id": "7be9eba1dfc52740",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "select kriti",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 840,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "531582f6515d1601",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "create table Kriti PM",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "create table KritiPM( TIMESTAMP INT PRIMARY KEY NOT NULL , PM25 DOUBLE, PM10 DOUBLE);",
+        "payloadType": "date",
+        "x": 160,
+        "y": 1600,
+        "wires": [
+            [
+                "621618b52a96e40c"
+            ]
+        ]
+    },
+    {
+        "id": "621618b52a96e40c",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 650,
+        "y": 1600,
+        "wires": [
+            [
+                "cb585a8c7ba4a60f"
+            ]
+        ]
+    },
+    {
+        "id": "cdc672c3eeb4d910",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "Get values from KritiPM",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "Select * from KritiPM",
+        "payloadType": "date",
+        "x": 170,
+        "y": 1660,
+        "wires": [
+            [
+                "621618b52a96e40c"
+            ]
+        ]
+    },
+    {
+        "id": "2c325e134aa8df42",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "test2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 190,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "cb585a8c7ba4a60f",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "select KritiPM",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 860,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "40b76051aa5ab80b",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "create table VolosPM ",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "create table VolosPM( TIMESTAMP INT PRIMARY KEY NOT NULL , PM25 DOUBLE, PM10 DOUBLE);",
+        "payloadType": "date",
+        "x": 140,
+        "y": 180,
+        "wires": [
+            [
+                "37abe6752b63a749"
+            ]
+        ]
+    },
+    {
+        "id": "37abe6752b63a749",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 490,
+        "y": 120,
+        "wires": [
+            [
+                "8d47cd61813bc0a5"
+            ]
+        ]
+    },
+    {
+        "id": "33c9c71276a20369",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "get values from Volos",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from Volos",
+        "payloadType": "date",
+        "x": 140,
+        "y": 100,
+        "wires": [
+            [
+                "0012f72f0af84f75"
+            ]
+        ]
+    },
+    {
+        "id": "7c8b51689dc4803e",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "get values from volosPM",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from VolosPM",
+        "payloadType": "date",
+        "x": 150,
+        "y": 240,
+        "wires": [
+            [
+                "37abe6752b63a749"
+            ]
+        ]
+    },
+    {
+        "id": "1e79170b92394141",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get temp hum pres",
+        "func": "var temp = msg.payload[0].sensordatavalues[1].value;\nvar hum = msg.payload[0].sensordatavalues[2].value;\nvar pres = msg.payload[0].sensordatavalues[0].value;\n\nvar temperature =parseFloat(temp);\nvar humidity = parseFloat(hum);\nvar pressure = parseFloat(pres);\n\n//var time = msg.payload[0].timestamp;\nvar seconds = new Date().getTime() / 1000;\n//var time =12345478;\n\nvar newMsg = {\n    \"topic\": \"INSERT INTO Volos VALUES (\" + seconds + \",\"  + temperature + \",\" + humidity + \",\" + pressure + \")\"\n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 680,
+        "y": 180,
+        "wires": [
+            [
+                "d89d2f518fe5e2a6",
+                "0012f72f0af84f75"
+            ]
+        ]
+    },
+    {
+        "id": "6faa5f8462a3b009",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get mp",
+        "func": "var p25 = msg.payload[0].sensordatavalues[0].value;\nvar p10 = msg.payload[0].sensordatavalues[1].value;\n\nvar pm25 = parseFloat(p25);\nvar pm10 = parseFloat(p10);\n\n//var time = 1234556;\nvar seconds = new Date().getTime() / 1000;\n\nvar newMsg = {\n    \"topic\": \"INSERT INTO VolosPM VALUES (\" + seconds + \",\"  + pm25 + \",\" + pm10 + \")\"\n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 180,
+        "wires": [
+            [
+                "989f9fd50f119dad",
+                "37abe6752b63a749"
+            ]
+        ]
+    },
+    {
+        "id": "d89d2f518fe5e2a6",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "test 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "989f9fd50f119dad",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "test 4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1110,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8d47cd61813bc0a5",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "fc457d4b86d92aa8",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "Every 2 hours",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "7200",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 120,
+        "y": 2540,
+        "wires": [
+            [
+                "664ed5fe475e68a8",
+                "f96c15377f0b393a",
+                "9c0f3c421aa104bc",
+                "4955586e2f22e4ab",
+                "37fe2cfb6b920cf1",
+                "04225613b294b403",
+                "e8a28a6a28700eb5",
+                "857b6f9aa29a3fbd",
+                "61191e3bf12bffc5",
+                "05020e01ed1a0d4a",
+                "d375089024cf731d",
+                "964f45a8fbab6366",
+                "41fb4c18f528cbf6",
+                "77b736b7eeeb5443"
+            ]
+        ]
+    },
+    {
+        "id": "664ed5fe475e68a8",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg temp Volos",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(TEMPERATURE) from Volos where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1860,
+        "wires": [
+            [
+                "383093d2da3cd06f"
+            ]
+        ]
+    },
+    {
+        "id": "383093d2da3cd06f",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 1860,
+        "wires": [
+            [
+                "1f8e23bd896432c0"
+            ]
+        ]
+    },
+    {
+        "id": "8908191715439039",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "5b8a2008be92540b",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "AVG Temperature",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#00fa11",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1070,
+        "y": 1860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f8e23bd896432c0",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(TEMPERATURE)\"]}; \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 1860,
+        "wires": [
+            [
+                "f89d2f16fe5c40fe",
+                "8908191715439039"
+            ]
+        ]
+    },
+    {
+        "id": "f89d2f16fe5c40fe",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "f96c15377f0b393a",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg hum Volos ",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(HUMIDITY) from Volos where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 1940,
+        "wires": [
+            [
+                "3b8b073af3869d81"
+            ]
+        ]
+    },
+    {
+        "id": "9c0f3c421aa104bc",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg pres Volos",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(PRESSURE) from Volos where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 2020,
+        "wires": [
+            [
+                "7253d71d9daaa874"
+            ]
+        ]
+    },
+    {
+        "id": "3b8b073af3869d81",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 1940,
+        "wires": [
+            [
+                "a10a953fc6214f71"
+            ]
+        ]
+    },
+    {
+        "id": "7253d71d9daaa874",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 2020,
+        "wires": [
+            [
+                "e3c55a7b140ff7e8"
+            ]
+        ]
+    },
+    {
+        "id": "0724dbe86ad4bcf5",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 2100,
+        "wires": [
+            [
+                "0bb0b69b629055c9"
+            ]
+        ]
+    },
+    {
+        "id": "445e0ccd991687d2",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 2180,
+        "wires": [
+            [
+                "83c97a472f637e68"
+            ]
+        ]
+    },
+    {
+        "id": "a10a953fc6214f71",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(HUMIDITY)\"]}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 1940,
+        "wires": [
+            [
+                "a5dcf3cccb3ac3ec",
+                "6c6b87e15cae1fe6"
+            ]
+        ]
+    },
+    {
+        "id": "e3c55a7b140ff7e8",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(PRESSURE)\"]}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 2020,
+        "wires": [
+            [
+                "54630abd3fd01db1",
+                "d8ed8b6a66effdde"
+            ]
+        ]
+    },
+    {
+        "id": "0bb0b69b629055c9",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(PM25)\"]}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 2100,
+        "wires": [
+            [
+                "25bb254864733adb",
+                "78865bc98f641522"
+            ]
+        ]
+    },
+    {
+        "id": "83c97a472f637e68",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(PM10)\"]}; ",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 2180,
+        "wires": [
+            [
+                "9897f01829a6160a",
+                "43bb8d249806525d"
+            ]
+        ]
+    },
+    {
+        "id": "a5dcf3cccb3ac3ec",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 1900,
+        "wires": []
+    },
+    {
+        "id": "54630abd3fd01db1",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 1980,
+        "wires": []
+    },
+    {
+        "id": "6c6b87e15cae1fe6",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "5b8a2008be92540b",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "AVG Humidity",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#00fa11",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1060,
+        "y": 1940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d8ed8b6a66effdde",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "5b8a2008be92540b",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "label": "AVG Pressure",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#00fa11",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1060,
+        "y": 2020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4955586e2f22e4ab",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg pm2.5 Volos",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(PM25) from VolosPM where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 380,
+        "y": 2100,
+        "wires": [
+            [
+                "0724dbe86ad4bcf5"
+            ]
+        ]
+    },
+    {
+        "id": "37fe2cfb6b920cf1",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg pm10 Volos",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(PM10) from VolosPM where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 2180,
+        "wires": [
+            [
+                "445e0ccd991687d2"
+            ]
+        ]
+    },
+    {
+        "id": "25bb254864733adb",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer4",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 2060,
+        "wires": []
+    },
+    {
+        "id": "9897f01829a6160a",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer5",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 2140,
+        "wires": []
+    },
+    {
+        "id": "78865bc98f641522",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "13fa9a0e744d2661",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "AVG PM2.5",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cb1a4f",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1050,
+        "y": 2100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43bb8d249806525d",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "13fa9a0e744d2661",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "label": "AVG PM10",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cd194f",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1050,
+        "y": 2180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "04225613b294b403",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg temp Kriti",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(TEMPERATURE) from Kriti where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 2280,
+        "wires": [
+            [
+                "3176bda8272afc68"
+            ]
+        ]
+    },
+    {
+        "id": "3176bda8272afc68",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 2280,
+        "wires": [
+            [
+                "366d8870fa02682f"
+            ]
+        ]
+    },
+    {
+        "id": "fbba5802dfc6e409",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "9016e4062f73eb44",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Avg Temperature",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#00fa11",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1070,
+        "y": 2280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "366d8870fa02682f",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(TEMPERATURE)\"]}; \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 2280,
+        "wires": [
+            [
+                "3004aa4c7fb469d5",
+                "fbba5802dfc6e409"
+            ]
+        ]
+    },
+    {
+        "id": "3004aa4c7fb469d5",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 2240,
+        "wires": []
+    },
+    {
+        "id": "e8a28a6a28700eb5",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg hum Kriti",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(HUMIDITY) from Kriti where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 2360,
+        "wires": [
+            [
+                "ef0fe1fc102e3949"
+            ]
+        ]
+    },
+    {
+        "id": "857b6f9aa29a3fbd",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg pres Kriti",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(PRESSURE) from Kriti where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 2440,
+        "wires": [
+            [
+                "44b10a934e81739f"
+            ]
+        ]
+    },
+    {
+        "id": "ef0fe1fc102e3949",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 2360,
+        "wires": [
+            [
+                "a899a9a5a83c6d16"
+            ]
+        ]
+    },
+    {
+        "id": "44b10a934e81739f",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 2440,
+        "wires": [
+            [
+                "a36319f52a910498"
+            ]
+        ]
+    },
+    {
+        "id": "4203d0a8f2a6352e",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 2520,
+        "wires": [
+            [
+                "8c1925f647944558"
+            ]
+        ]
+    },
+    {
+        "id": "fcedeca5541899a2",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 570,
+        "y": 2600,
+        "wires": [
+            [
+                "aadfabf8ddc9ce1d"
+            ]
+        ]
+    },
+    {
+        "id": "a899a9a5a83c6d16",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(HUMIDITY)\"]}; \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 2360,
+        "wires": [
+            [
+                "24542ee520a6809a",
+                "d92bb4d132c8c49a"
+            ]
+        ]
+    },
+    {
+        "id": "a36319f52a910498",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(PRESSURE)\"]}; \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 2440,
+        "wires": [
+            [
+                "676ef1270c026fb3",
+                "d4ad151aacb37711"
+            ]
+        ]
+    },
+    {
+        "id": "8c1925f647944558",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(PM25)\"]}; \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 2520,
+        "wires": [
+            [
+                "f14d67143d1963af",
+                "41c232b46353b133"
+            ]
+        ]
+    },
+    {
+        "id": "aadfabf8ddc9ce1d",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "return {payload : msg.payload[0][\"avg(PM10)\"]}; \n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 800,
+        "y": 2600,
+        "wires": [
+            [
+                "8eea41d09970e832",
+                "fb18da381c107fb0"
+            ]
+        ]
+    },
+    {
+        "id": "24542ee520a6809a",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 2320,
+        "wires": []
+    },
+    {
+        "id": "676ef1270c026fb3",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 2400,
+        "wires": []
+    },
+    {
+        "id": "d92bb4d132c8c49a",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "9016e4062f73eb44",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "label": "Avg Humidity",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#00fa11",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1050,
+        "y": 2360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d4ad151aacb37711",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "9016e4062f73eb44",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "label": "Avg Pressure",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#00fa11",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1060,
+        "y": 2440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "61191e3bf12bffc5",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg pm2.5 Kriti",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(PM25) from KritiPM where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 2520,
+        "wires": [
+            [
+                "4203d0a8f2a6352e"
+            ]
+        ]
+    },
+    {
+        "id": "05020e01ed1a0d4a",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "get avg pm10 Kriti",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(PM10) from KritiPM where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 370,
+        "y": 2600,
+        "wires": [
+            [
+                "fcedeca5541899a2"
+            ]
+        ]
+    },
+    {
+        "id": "f14d67143d1963af",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 2480,
+        "wires": []
+    },
+    {
+        "id": "8eea41d09970e832",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "printer14",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1040,
+        "y": 2560,
+        "wires": []
+    },
+    {
+        "id": "41c232b46353b133",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "4cde97c731076dc6",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Avg PM2.5",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cb1a4f",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1050,
+        "y": 2520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fb18da381c107fb0",
+        "type": "ui_chart",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "group": "4cde97c731076dc6",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "label": "Avg PM10",
+        "chartType": "horizontalBar",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#cd194f",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 1050,
+        "y": 2600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c898c922a041975a",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "create table VolosAVG",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "create table VolosAVG( TIMESTAMP INT PRIMARY KEY NOT NULL , AVGTEMPERATURE DOUBLE, AVGHUMIDITY DOUBLE , AVGPRESSURE DOUBLE)",
+        "payloadType": "date",
+        "x": 160,
+        "y": 3040,
+        "wires": [
+            [
+                "f745d0be348f902e"
+            ]
+        ]
+    },
+    {
+        "id": "f745d0be348f902e",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 390,
+        "y": 3040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "16a58ef1b91f0d9f",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 590,
+        "y": 2700,
+        "wires": [
+            [
+                "b03964b06360db94"
+            ]
+        ]
+    },
+    {
+        "id": "d375089024cf731d",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "VolosAVG1",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(TEMPERATURE), avg(HUMIDITY), AVG(PRESSURE) from Volos where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 2700,
+        "wires": [
+            [
+                "16a58ef1b91f0d9f"
+            ]
+        ]
+    },
+    {
+        "id": "b03964b06360db94",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "var temp=msg.payload[0][\"avg(TEMPERATURE)\"];\nvar hum=msg.payload[0][\"avg(HUMIDITY)\"];\nvar pres=msg.payload[0][\"AVG(PRESSURE)\"];\n\nvar temperature =parseFloat(temp);\nvar humidity = parseFloat(hum);\nvar pressure = parseFloat(pres);\n\n\nvar seconds = new Date().getTime() / 1000;\n\n\nvar newMsg = {\n    \"topic\": \"INSERT INTO VolosAVG VALUES (\" + seconds + \",\"  + temperature + \",\" + humidity + \",\" + pressure + \")\"\n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 2700,
+        "wires": [
+            [
+                "86e9b0fdfe3e4650",
+                "88946de7451eec64"
+            ]
+        ]
+    },
+    {
+        "id": "86e9b0fdfe3e4650",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 2660,
+        "wires": []
+    },
+    {
+        "id": "88946de7451eec64",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1030,
+        "y": 2700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f572ac92fb6ae3f1",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "select * from KritiAVGPM",
+        "payloadType": "date",
+        "x": 1200,
+        "y": 3240,
+        "wires": [
+            [
+                "97d8a1dea87c0e7c"
+            ]
+        ]
+    },
+    {
+        "id": "97d8a1dea87c0e7c",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1190,
+        "y": 3160,
+        "wires": [
+            [
+                "23bb69ee2e64b84e"
+            ]
+        ]
+    },
+    {
+        "id": "23bb69ee2e64b84e",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 3080,
+        "wires": []
+    },
+    {
+        "id": "964f45a8fbab6366",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "Volos AVG2",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(PM25) , avg(PM10) from VolosPM where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 2780,
+        "wires": [
+            [
+                "4009b293600ec9e6"
+            ]
+        ]
+    },
+    {
+        "id": "41fb4c18f528cbf6",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "Kriti AVG1",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(TEMPERATURE), avg(HUMIDITY), AVG(PRESSURE) from Kriti where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 2860,
+        "wires": [
+            [
+                "800c05cf80c2ec70"
+            ]
+        ]
+    },
+    {
+        "id": "77b736b7eeeb5443",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "Kriti AVG2",
+        "func": "var seconds = new Date().getTime() / 1000;  //current time \nvar oldTime = seconds-7200; //time minus 2 hours\n\nvar newMsg = {\n    \"topic\": \"select avg(PM25) , avg(PM10) from KritiPM where TIMESTAMP <= \" + seconds + \" and TIMESTAMP >= \" + oldTime \n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 350,
+        "y": 2940,
+        "wires": [
+            [
+                "c3b6a4457fdb8389"
+            ]
+        ]
+    },
+    {
+        "id": "f8ccd74585830294",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "create VolosAVGPM",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "create table VolosAVGPM( TIMESTAMP INT PRIMARY KEY NOT NULL , PM25AVG DOUBLE, PM10AVG DOUBLE)",
+        "payloadType": "date",
+        "x": 600,
+        "y": 3040,
+        "wires": [
+            [
+                "68c5c087ce218d91"
+            ]
+        ]
+    },
+    {
+        "id": "45d6f35bed760f1c",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "create table KritiAVG",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "create table KritiAVG( TIMESTAMP INT PRIMARY KEY NOT NULL , AVGTEMPERATURE DOUBLE, AVGHUMIDITY DOUBLE , AVGPRESSURE DOUBLE)",
+        "payloadType": "date",
+        "x": 150,
+        "y": 3100,
+        "wires": [
+            [
+                "dba76912ce770c27"
+            ]
+        ]
+    },
+    {
+        "id": "56a1f3502d20e9a8",
+        "type": "inject",
+        "z": "bae15abd2e51cc2b",
+        "name": "create KritiAVGPM",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "create table KritiAVGPM( TIMESTAMP INT PRIMARY KEY NOT NULL , PM25AVG DOUBLE, PM10AVG DOUBLE)",
+        "payloadType": "date",
+        "x": 600,
+        "y": 3100,
+        "wires": [
+            [
+                "dd2b9b81d76d958e"
+            ]
+        ]
+    },
+    {
+        "id": "68c5c087ce218d91",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 790,
+        "y": 3040,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dba76912ce770c27",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 390,
+        "y": 3100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd2b9b81d76d958e",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 790,
+        "y": 3100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4009b293600ec9e6",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 590,
+        "y": 2780,
+        "wires": [
+            [
+                "cad51813d352d785"
+            ]
+        ]
+    },
+    {
+        "id": "5682a9871e86a68e",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1030,
+        "y": 2780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "800c05cf80c2ec70",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 590,
+        "y": 2860,
+        "wires": [
+            [
+                "52c64ae2d8af988e"
+            ]
+        ]
+    },
+    {
+        "id": "c3b6a4457fdb8389",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 590,
+        "y": 2940,
+        "wires": [
+            [
+                "88bbe9c9f46d5be0"
+            ]
+        ]
+    },
+    {
+        "id": "f4902cc65bce47df",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1030,
+        "y": 2860,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "a7137848caade5a4",
+        "type": "sqlite",
+        "z": "bae15abd2e51cc2b",
+        "mydb": "1f648a987115d479",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "",
+        "x": 1030,
+        "y": 2940,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cad51813d352d785",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "var pm25=msg.payload[0][\"avg(PM25)\"];\nvar pm10=msg.payload[0][\"avg(PM10)\"];\n\n\nvar fpm25 =parseFloat(pm25);\nvar fpm10 = parseFloat(pm10);\n\nvar seconds = new Date().getTime() / 1000;\n\n\nvar newMsg = {\n    \"topic\": \"INSERT INTO VolosAVGPM VALUES (\" + seconds + \",\"  + fpm25 + \",\" + fpm10 + \")\"\n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 2780,
+        "wires": [
+            [
+                "5682a9871e86a68e"
+            ]
+        ]
+    },
+    {
+        "id": "52c64ae2d8af988e",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "var temp=msg.payload[0][\"avg(TEMPERATURE)\"];\nvar hum=msg.payload[0][\"avg(HUMIDITY)\"];\nvar pres=msg.payload[0][\"AVG(PRESSURE)\"];\n\nvar temperature =parseFloat(temp);\nvar humidity = parseFloat(hum);\nvar pressure = parseFloat(pres);\n\n\nvar seconds = new Date().getTime() / 1000;\n\n\nvar newMsg = {\n    \"topic\": \"INSERT INTO KritiAVG VALUES (\" + seconds + \",\"  + temperature + \",\" + humidity + \",\" + pressure + \")\"\n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 2860,
+        "wires": [
+            [
+                "f4902cc65bce47df"
+            ]
+        ]
+    },
+    {
+        "id": "88bbe9c9f46d5be0",
+        "type": "function",
+        "z": "bae15abd2e51cc2b",
+        "name": "",
+        "func": "var pm25=msg.payload[0][\"avg(PM25)\"];\nvar pm10=msg.payload[0][\"avg(PM10)\"];\n\n\nvar fpm25 =parseFloat(pm25);\nvar fpm10 = parseFloat(pm10);\n\nvar seconds = new Date().getTime() / 1000;\n\n\nvar newMsg = {\n    \"topic\": \"INSERT INTO KritiAVGPM VALUES (\" + seconds + \",\"  + fpm25 + \",\" + fpm10 + \")\"\n}\n\nreturn newMsg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 820,
+        "y": 2940,
+        "wires": [
+            [
+                "8951253bb8b6ca8c",
+                "a7137848caade5a4"
+            ]
+        ]
+    },
+    {
+        "id": "8951253bb8b6ca8c",
+        "type": "debug",
+        "z": "bae15abd2e51cc2b",
+        "name": "here",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1170,
+        "y": 2900,
+        "wires": []
+    },
+    {
+        "id": "c50252c4e35d0af0",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "e17e8877716d480e",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "e509ba16b03ac3b6",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "e17e8877716d480e",
+        "order": 4,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "a2890c0198d07972",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "5b8a2008be92540b",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "b433676112ca265f",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "5b8a2008be92540b",
+        "order": 4,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "54b4a221f5d16f03",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "65acb63e3f173c28",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "d34e898d609dbc42",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "65acb63e3f173c28",
+        "order": 3,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "68e1cdef916fabd0",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "65acb63e3f173c28",
+        "order": 4,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "f513d577ec3471b4",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "65acb63e3f173c28",
+        "order": 5,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "37b9a7c66af3396a",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "65acb63e3f173c28",
+        "order": 6,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "0fc9b51f77cdd57f",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "65acb63e3f173c28",
+        "order": 7,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "49367dabdf69713a",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "13fa9a0e744d2661",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "b3753d2a03cdad47",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "13fa9a0e744d2661",
+        "order": 3,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "4088b642a2da4204",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "13fa9a0e744d2661",
+        "order": 4,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "8132ef2bdb5982bf",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "13fa9a0e744d2661",
+        "order": 5,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "c20f34d7e52da754",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "13fa9a0e744d2661",
+        "order": 6,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "697f612684e26e7e",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "13fa9a0e744d2661",
+        "order": 7,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "08fda3941b0d8c48",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "32e58e0576ddecf5",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "7cbb6ccdc38a89bd",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "32e58e0576ddecf5",
+        "order": 4,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "5de4dcdbeff3dfc7",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "9016e4062f73eb44",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "4c52e63894c38e7a",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "9016e4062f73eb44",
+        "order": 4,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "400efbb441453842",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "12d195b722024a33",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "1236b13c52f409e6",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "12d195b722024a33",
+        "order": 3,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "5187ede485f4860b",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "12d195b722024a33",
+        "order": 4,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "bcf0a2b1e3417ded",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "12d195b722024a33",
+        "order": 5,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "fbb830e92c3b1a1d",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "12d195b722024a33",
+        "order": 6,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "40031b71b1951373",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "12d195b722024a33",
+        "order": 7,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "51c31050ee413ea5",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "4cde97c731076dc6",
+        "order": 2,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "691d4e0c672281ef",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "4cde97c731076dc6",
+        "order": 3,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "888bd56876a84ebd",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "4cde97c731076dc6",
+        "order": 4,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "ba3734b17702788c",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "4cde97c731076dc6",
+        "order": 5,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "59ddb8e5d508f4e2",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "4cde97c731076dc6",
+        "order": 6,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "a3b8e22e6823f197",
+        "type": "ui_spacer",
+        "z": "bae15abd2e51cc2b",
+        "name": "spacer",
+        "group": "4cde97c731076dc6",
+        "order": 7,
+        "width": 6,
+        "height": 1
+    },
+    {
+        "id": "e17e8877716d480e",
+        "type": "ui_group",
+        "name": "Volos",
+        "tab": "2aa89d5ed532dbf2",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "65acb63e3f173c28",
+        "type": "ui_group",
+        "name": "Volos",
+        "tab": "2aa89d5ed532dbf2",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "32e58e0576ddecf5",
+        "type": "ui_group",
+        "name": "Palaioxwra Kritis",
+        "tab": "2aa89d5ed532dbf2",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "12d195b722024a33",
+        "type": "ui_group",
+        "name": "Palaioxwra Kritis",
+        "tab": "2aa89d5ed532dbf2",
+        "order": 7,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "1f648a987115d479",
+        "type": "sqlitedb",
+        "db": "IOT",
+        "mode": "RWC"
+    },
+    {
+        "id": "5b8a2008be92540b",
+        "type": "ui_group",
+        "name": "AVG Volos",
+        "tab": "2aa89d5ed532dbf2",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "13fa9a0e744d2661",
+        "type": "ui_group",
+        "name": "Volos AVG",
+        "tab": "2aa89d5ed532dbf2",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "9016e4062f73eb44",
+        "type": "ui_group",
+        "name": "AVG Palaioxwra Kritis",
+        "tab": "2aa89d5ed532dbf2",
+        "order": 6,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "4cde97c731076dc6",
+        "type": "ui_group",
+        "name": "Avg Palaioxwra Kritis",
+        "tab": "2aa89d5ed532dbf2",
+        "order": 8,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "2aa89d5ed532dbf2",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    }
+]
