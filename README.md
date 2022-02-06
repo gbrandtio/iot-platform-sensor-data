@@ -1,4 +1,4 @@
-# node-red-sensor-opendata
+# iot-platform-sensor-data
 This repository includes applications that communicate with sensor open data APIs in order to request, receive, display and analyze environmental data from various sensors and locations.<br><br>
 In order to collect the data from the sensors the following are used:<br>
 - API:  https://github.com/opendata-stuttgart/meta/wiki/EN-APIs<br>
