@@ -47,7 +47,7 @@ namespace Models
             string city = String.Empty;
             try
             {
-                string URL = @"https://maps.googleapis.com/maps/api/geocode/xml?latlng=" + longitude + "," + latitude + "&key=" + SharedValues.GL_GEO_API_KEY";
+                string URL = SharedValues.GEO_API_URL_LATLANG + longitude + "," + latitude + SharedValues.URL_KEY_PARAM + SharedValues.GL_GEO_API_KEY;
                 string response = GET.DoRequest(URL);
                 string address = GET.GeocodeRes_ExtractFormattedAddress(response);
                 city = ExtractInfo(address, 1);

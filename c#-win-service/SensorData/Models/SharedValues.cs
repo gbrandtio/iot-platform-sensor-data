@@ -10,6 +10,8 @@ namespace Models
     {
         // Constants
         public const string GEO_API_KEY = "GEO_API_KEY";
+        public const string GEO_API_URL_LATLANG = @"https://maps.googleapis.com/maps/api/geocode/xml?latlng=";
+        public const string URL_KEY_PARAM = @"&key=";
         public const string UNKNOWN = "unknown";
 
         // Variables that need to be injected globally
