@@ -8,11 +8,14 @@ namespace Models
 {
     public static class SharedValues
     {
-        // Constants
+        // Geocode API related constants.
         public const string GEO_API_KEY = "GEO_API_KEY";
         public const string GEO_API_URL_LATLANG = @"https://maps.googleapis.com/maps/api/geocode/xml?latlng=";
         public const string URL_KEY_PARAM = @"&key=";
+
+        // Constant strings
         public const string UNKNOWN = "unknown";
+        public const string TIMER_INTERVAL = "TimerInterval";
 
         // Variables that need to be injected globally
         public static string GL_GEO_API_KEY { get; set; }
