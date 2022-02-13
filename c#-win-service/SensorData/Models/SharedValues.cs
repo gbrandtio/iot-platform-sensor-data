@@ -16,6 +16,7 @@ namespace Models
         // Constant strings
         public const string UNKNOWN = "unknown";
         public const string TIMER_INTERVAL = "TimerInterval";
+        public const string FORMATTED_ADDRESS = "formatted_address";
 
         // Variables that need to be injected globally
         public static string GL_GEO_API_KEY { get; set; }

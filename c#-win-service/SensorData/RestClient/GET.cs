@@ -14,6 +14,7 @@ namespace RestClient
     /// </summary>
     public class GET
     {
+        #region Http Request Methods
         public static string DoRequest(string url)
         {
             string response = String.Empty;
@@ -35,21 +36,6 @@ namespace RestClient
             }
             return response;
         }
-
-        public static string GeocodeRes_ExtractFormattedAddress(string response)
-        {
-            string formattedAddress = String.Empty;
-            try
-            {
-                JObject joResponse = JObject.Parse(response);
-                JArray ojObject = (JArray)joResponse["results"];
-                ojObject[0]["formatted_address"].ToString();
-            }
-            catch(Exception e)
-            {
-
-            }
-            return formattedAddress;
-        }
+        #endregion
     }
 }

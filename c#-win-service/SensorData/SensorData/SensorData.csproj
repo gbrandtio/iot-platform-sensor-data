@@ -63,6 +63,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Helpers\Helpers.csproj">
+      <Project>{06e54922-c371-4199-bd24-c197d154d2bb}</Project>
+      <Name>Helpers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{E3DC6F5E-AE15-4F71-8698-F7D6289C1EB8}</Project>
       <Name>Models</Name>

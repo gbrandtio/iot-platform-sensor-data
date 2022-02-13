@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Helpers;
 
 namespace Models
 {
@@ -49,7 +50,7 @@ namespace Models
             {
                 string URL = SharedValues.GEO_API_URL_LATLANG + longitude + "," + latitude + SharedValues.URL_KEY_PARAM + SharedValues.GL_GEO_API_KEY;
                 string response = GET.DoRequest(URL);
-                string address = GET.GeocodeRes_ExtractFormattedAddress(response);
+                string address = Parser.GeocodeRes_ExtractFormattedAddress(response);
                 city = ExtractInfo(address, 1);
                 if (city.Equals(SharedValues.UNKNOWN)) city = ExtractInfo(address, 2); 
             }
