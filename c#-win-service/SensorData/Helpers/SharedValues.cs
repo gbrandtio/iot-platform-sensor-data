@@ -8,17 +8,24 @@ namespace Helpers
 {
     public static class SharedValues
     {
-        // Geocode API related constants.
-        public const string GEO_API_KEY = "GEO_API_KEY";
+        // Geocode API
         public const string GEO_API_URL_LATLANG = @"https://maps.googleapis.com/maps/api/geocode/xml?latlng=";
-        public const string URL_KEY_PARAM = @"&key=";
-
-        // Constant strings
-        public const string UNKNOWN = "unknown";
-        public const string TIMER_INTERVAL = "TimerInterval";
+        public const string GEO_API_URL_KEY_PARAM = @"&key=";
+        public const string ARRAY_RESULTS = "results";
         public const string FORMATTED_ADDRESS = "formatted_address";
+        public const int GEO_INFO_CITY = 1;
+        public const int GEO_INFO_COUNTRY = 2;
 
-        // Variables that need to be injected globally
+        // Configuration
+        public const string GEO_API_KEY = "GEO_API_KEY";
+        public const string COUNTRY_CODE = "CountryCode";
+        public const string TIMER_INTERVAL = "TimerInterval";
+        public const string SENSOR_API = "SensorAPI";
+
+        // Defaults
+        public const string UNKNOWN = "unknown";
+
+        // Inject Variables
         public static string GL_GEO_API_KEY { get; set; }
     }
 }
