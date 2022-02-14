@@ -10,42 +10,43 @@ namespace Models
     public class Temperature
     {
         #region Constructor
+        public Temperature() { }
         /// <summary>
         /// Simple constructor to create a Temperature object.
-        /// The temperature in Kelvin and Fahreneit is delivered automatically by the respective properties.
+        /// The temperature in Kelvin and Fahreneit is delivered automatically by the respective properties. The temperature measurement
+        /// on this constructor must be passed in Celsius degrees.
         /// </summary>
         /// <param name="celsiusMeasurement">The measurement of the temperature in Cesius.</param>
-        /// <param name="location">The location of the sensor.</param>
         public Temperature(double celsiusMeasurement, Location location)
         {
-            this.Celsius = celsiusMeasurement;
+            this.Measurement = celsiusMeasurement;
             this.Location = location;
         }
         #endregion
 
         #region Properties
+        public double Measurement { get; set; } // Measurement of temperature supplied in Celsius degrees.
         public Location Location { get; set; }
-        public double Celsius { get; set; }
         public double Kelvin
         {
             get
             {
-                return Celsius + 273.15;
+                return Measurement + 273.15;
             }
             set
             {
-                Celsius = value - 273.15;
+                Measurement = value - 273.15;
             }
         }
         public double Fahrenheit
         {
             get
             {
-                return Celsius * 9 / 5 + 32;
+                return Measurement * 9 / 5 + 32;
             }
             set
             {
-                Celsius = (value - 32) * 5 / 9;
+                Measurement = (value - 32) * 5 / 9;
             }
         }
         #endregion
