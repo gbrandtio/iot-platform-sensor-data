@@ -1,4 +1,3 @@
-﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -30,7 +29,7 @@ namespace RestClient
                     response = reader.ReadToEnd();
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
 
             }
