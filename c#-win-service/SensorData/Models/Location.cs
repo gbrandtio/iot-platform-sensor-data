@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Helpers;
+using Parsers;
 
 namespace Models
 {
@@ -17,7 +18,7 @@ namespace Models
     /// - Latitude: The latitude of the location.
     /// - Country: The country of the location.
     /// - City: The city that the location belongs to.
-    /// Provides also the ability to find a city based on the provided longitude and latitude via Google Geocoding API.
+    /// Provides also the ability to find location info based on the provided longitude and latitude via Google Geocoding API.
     /// </summary>
     public class Location
     {
@@ -28,7 +29,7 @@ namespace Models
             this.Longitude = longitude;
             this.Latitude = latitude;
             this.Country = country;
-            this.City = FindCity(this.Longitude, this.Latitude);
+            this.City = FindLocationInfo(this.Longitude, this.Latitude);
         }
         #endregion
 
@@ -43,37 +44,22 @@ namespace Models
         #endregion
 
         #region Private Methods
-        private string FindCity(double longitude, double latitude)
+        private string FindLocationInfo(double longitude, double latitude)
         {
-            string city = String.Empty;
+            string localeInfo = SharedValues.UNKNOWN;
             try
             {
-                string URL = SharedValues.GEO_API_URL_LATLANG + longitude + "," + latitude + SharedValues.URL_KEY_PARAM + SharedValues.GL_GEO_API_KEY;
+                string URL = SharedValues.GEO_API_URL_LATLANG + longitude + "," + latitude + SharedValues.GEO_API_URL_KEY_PARAM + SharedValues.GL_GEO_API_KEY;
                 string response = GET.DoRequest(URL);
-                string address = Parser.GeocodeRes_ExtractFormattedAddress(response);
-                city = ExtractInfo(address, 1);
-                if (city.Equals(SharedValues.UNKNOWN)) city = ExtractInfo(address, 2); 
+                string formattedAddress = GeocodeResponseParser.GeocodeRes_ExtractFormattedAddress(response);
+                localeInfo = GeocodeResponseParser.GeocodeRes_ExtractFormattedAddressInfo(formattedAddress, SharedValues.GEO_INFO_CITY);
+                if (localeInfo.Equals(SharedValues.UNKNOWN)) localeInfo = GeocodeResponseParser.GeocodeRes_ExtractFormattedAddressInfo(formattedAddress, SharedValues.GEO_INFO_COUNTRY); 
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-            return city;
-        }
-
-        private string ExtractInfo(string address, int pos)
-        {
-            string requestedAddressComponent = SharedValues.UNKNOWN;
-            try
-            {
-                string[] addrArray = address.Split(',');
-                requestedAddressComponent = addrArray[pos];
-            }
-            catch (Exception e)
-            {
-
-            }
-            return requestedAddressComponent;
+            return localeInfo;
         }
         #endregion
     }
