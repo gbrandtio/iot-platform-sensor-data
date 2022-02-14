@@ -17,7 +17,7 @@ namespace Parsers
         /// <returns>The formatted_address value as a string</returns>
         public static string GeocodeRes_ExtractFormattedAddress(string response)
         {
-            string formattedAddress = String.Empty;
+            string formattedAddress = SharedValues.UNKNOWN;
             try
             {
                 JObject jResponse = JObject.Parse(response);
