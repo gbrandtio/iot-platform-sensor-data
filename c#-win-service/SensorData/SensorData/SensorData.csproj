@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Service.cs" />
     <Compile Include="SensorDataService.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -70,6 +71,14 @@
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{E3DC6F5E-AE15-4F71-8698-F7D6289C1EB8}</Project>
       <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parsers\Parsers.csproj">
+      <Project>{18e20006-07a4-4771-82b9-3738ffb21dfd}</Project>
+      <Name>Parsers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RestClient\RestClient.csproj">
+      <Project>{94511d84-c198-4368-b6be-c59fa058da84}</Project>
+      <Name>RestClient</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
