@@ -41,7 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Humidity.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="P1.cs" />
+    <Compile Include="P2.cs" />
     <Compile Include="Temperature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -49,6 +52,10 @@
     <ProjectReference Include="..\Helpers\Helpers.csproj">
       <Project>{06e54922-c371-4199-bd24-c197d154d2bb}</Project>
       <Name>Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Parsers\Parsers.csproj">
+      <Project>{18E20006-07A4-4771-82B9-3738FFB21DFD}</Project>
+      <Name>Parsers</Name>
     </ProjectReference>
     <ProjectReference Include="..\RestClient\RestClient.csproj">
       <Project>{94511D84-C198-4368-B6BE-C59FA058DA84}</Project>
