@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Helpers", "Helpers\Helpers.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Parsers", "Parsers\Parsers.csproj", "{18E20006-07A4-4771-82B9-3738FFB21DFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Interfaces", "Interfaces\Interfaces.csproj", "{3CE1AE07-28A5-4A37-814B-274C799B01CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{18E20006-07A4-4771-82B9-3738FFB21DFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{18E20006-07A4-4771-82B9-3738FFB21DFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{18E20006-07A4-4771-82B9-3738FFB21DFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CE1AE07-28A5-4A37-814B-274C799B01CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CE1AE07-28A5-4A37-814B-274C799B01CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CE1AE07-28A5-4A37-814B-274C799B01CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CE1AE07-28A5-4A37-814B-274C799B01CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
