@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="ILocation.cs" />
     <Compile Include="IMeasurement.cs" />
-    <Compile Include="IMeasurement.cs" />
     <Compile Include="IParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

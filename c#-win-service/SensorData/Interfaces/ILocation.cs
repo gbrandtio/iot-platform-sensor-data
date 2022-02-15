@@ -14,9 +14,5 @@ namespace Interfaces
         string Country { get; set; }
         string City { get; set; }
         #endregion
-
-        #region Methods
-        string FindLocationInfo(double longitude, double latitude)
-        #endregion
     }
 }
