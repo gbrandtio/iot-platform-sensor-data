@@ -58,14 +58,6 @@
       <Project>{3ce1ae07-28a5-4a37-814b-274c799b01ce}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Parsers\Parsers.csproj">
-      <Project>{18E20006-07A4-4771-82B9-3738FFB21DFD}</Project>
-      <Name>Parsers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RestClient\RestClient.csproj">
-      <Project>{94511D84-C198-4368-B6BE-C59FA058DA84}</Project>
-      <Name>RestClient</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
