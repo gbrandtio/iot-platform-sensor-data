@@ -32,7 +32,8 @@ namespace SensorData
             GeocodeDataHandler geocodeDataHandler = new GeocodeDataHandler();
             foreach (IMeasurement measurement in allMeasurements)
             {
-                measurement.Location.City = geocodeDataHandler.FindLocationInfo(measurement.Location.Longitude, measurement.Location.Latitude);
+                if (measurement != null)
+                    measurement.Location.City = geocodeDataHandler.FindLocationInfo(measurement.Location.Longitude, measurement.Location.Latitude);
             }
 
             // Save the data to the database.

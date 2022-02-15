@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Handlers\Handlers.csproj">
-      <Project>{18E20006-07A4-4771-82B9-3738FFB21DFD}</Project>
+      <Project>{18e20006-07a4-4771-82b9-3738ffb21dfd}</Project>
       <Name>Handlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Helpers\Helpers.csproj">
