@@ -64,17 +64,21 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Handlers\Handlers.csproj">
+      <Project>{18E20006-07A4-4771-82B9-3738FFB21DFD}</Project>
+      <Name>Handlers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Helpers\Helpers.csproj">
       <Project>{06e54922-c371-4199-bd24-c197d154d2bb}</Project>
       <Name>Helpers</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{3CE1AE07-28A5-4A37-814B-274C799B01CE}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{E3DC6F5E-AE15-4F71-8698-F7D6289C1EB8}</Project>
       <Name>Models</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Parsers\Parsers.csproj">
-      <Project>{18e20006-07a4-4771-82b9-3738ffb21dfd}</Project>
-      <Name>Parsers</Name>
     </ProjectReference>
     <ProjectReference Include="..\RestClient\RestClient.csproj">
       <Project>{94511d84-c198-4368-b6be-c59fa058da84}</Project>
