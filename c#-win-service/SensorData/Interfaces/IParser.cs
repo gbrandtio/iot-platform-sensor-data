@@ -10,7 +10,7 @@ namespace Interfaces
     {
         #region Methods
         string ExtractData(string json);
-        string ExtractSpecificInfo(string formattedAddress, int pos, char delimeter)
+        string ExtractSpecificInfo(string formattedAddress, int pos, char delimeter);
         #endregion
     }
 }

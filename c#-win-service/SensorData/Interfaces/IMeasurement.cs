@@ -8,6 +8,7 @@ namespace Interfaces
 {
     public interface IMeasurement
     {
+        string Name { get; }
         double Measurement { get; set; }
         ILocation Location { get; set; }
     }

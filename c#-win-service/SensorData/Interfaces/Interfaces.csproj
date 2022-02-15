@@ -41,10 +41,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IGeocodeResponseParser.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="IMeasurement.cs" />
-    <Compile Include="ISensorResponseParser.cs" />
+    <Compile Include="IMeasurement.cs" />
+    <Compile Include="IParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
