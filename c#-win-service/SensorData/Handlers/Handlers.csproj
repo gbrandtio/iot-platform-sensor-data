@@ -7,8 +7,8 @@
     <ProjectGuid>{18E20006-07A4-4771-82B9-3738FFB21DFD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Parsers</RootNamespace>
-    <AssemblyName>Parsers</AssemblyName>
+    <RootNamespace>Handlers</RootNamespace>
+    <AssemblyName>Handlers</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

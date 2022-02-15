@@ -26,7 +26,7 @@ namespace Handlers
         /// Iterates through the json response of the sensor API and tries to extract the required measurements
         /// and the location of each sensor.
         /// </summary>
-        /// <param name="json">The json response from the </param>
+        /// <param name="json">The json response from the Geocode API.</param>
         /// <returns>A List of IMeasurement objects. It is possible for a member of the List to be NULL.</returns>
         public List<IMeasurement> ExtractSensorDataValues(string json)
         {
@@ -46,22 +46,22 @@ namespace Handlers
                 foreach (JObject obj in jResultsArray)
                 {
                     // Extract location.
-                    JToken jLocation = (JObject)obj.GetValue("location");
+                    JToken jLocation = (JObject)obj.GetValue(SharedValues.LOCATION);
                     foreach (JProperty locationProperty in jLocation)
                     {
-                        if (locationProperty.Name.Equals("country")) country = locationProperty.Value.ToString();
-                        if (locationProperty.Name.Equals("longitude")) longitude = double.Parse(locationProperty.Value.ToString());
-                        if (locationProperty.Name.Equals("latitude")) latitude = double.Parse(locationProperty.Value.ToString());
+                        if (locationProperty.Name.Equals(SharedValues.COUNTRY)) country = locationProperty.Value.ToString();
+                        if (locationProperty.Name.Equals(SharedValues.LONGITUDE)) longitude = double.Parse(locationProperty.Value.ToString());
+                        if (locationProperty.Name.Equals(SharedValues.LATITUDE)) latitude = double.Parse(locationProperty.Value.ToString());
                     }
 
                     // Extract sensor data values
-                    JArray sensorDataValues = (JArray)obj.GetValue("sensordatavalues");
+                    JArray sensorDataValues = (JArray)obj.GetValue(SharedValues.SENSOR_DATA_VALUES);
                     foreach (JObject sensorValue in sensorDataValues)
                     {
-                        if (sensorValue.ContainsKey("value_type"))
+                        if (sensorValue.ContainsKey(SharedValues.VALUE_TYPE))
                         {
-                            measurementName = sensorValue.GetValue("value_type").ToString();
-                            measurementValue = double.Parse(sensorValue.GetValue("value").ToString());
+                            measurementName = sensorValue.GetValue(SharedValues.VALUE_TYPE).ToString();
+                            measurementValue = double.Parse(sensorValue.GetValue(SharedValues.VALUE).ToString());
                         }
                     }
 
