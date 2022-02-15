@@ -16,6 +16,15 @@ namespace Helpers
         public const int GEO_INFO_CITY = 1;
         public const int GEO_INFO_COUNTRY = 2;
 
+        // Sensor API
+        public const string SENSOR_DATA_VALUES = "sensordatavalues";
+        public const string LOCATION = "location";
+        public const string COUNTRY = "country";
+        public const string LONGITUDE = "longitude";
+        public const string LATITUDE = "latitude";
+        public const string VALUE_TYPE = "value_type";
+        public const string VALUE = "value";
+
         // Configuration
         public const string GEO_API_KEY = "GEO_API_KEY";
         public const string COUNTRY_CODE = "CountryCode";
