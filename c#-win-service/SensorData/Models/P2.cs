@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces;
 
 namespace Models
 {
     /// <summary>
     /// Class that represents the PM2.5 environmental measurement.
     /// </summary>
-    class P2
+    public class P2 : IMeasurement
     {
         #region Constructor
         public P2() { }
@@ -22,7 +23,7 @@ namespace Models
 
         #region Properties
         public double Measurement { get; set; }
-        public Location Location { get; set; }
+        public ILocation Location { get; set; }
         #endregion
     }
 }

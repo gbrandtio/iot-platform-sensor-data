@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Helpers;
+using Interfaces;
 
 namespace Models
 {
-    public class Temperature
+    public class Temperature : IMeasurement
     {
         #region Constructor
         public Temperature() { }
@@ -26,7 +27,7 @@ namespace Models
 
         #region Properties
         public double Measurement { get; set; } // Measurement of temperature supplied in Celsius degrees.
-        public Location Location { get; set; }
+        public ILocation Location { get; set; }
         public double Kelvin
         {
             get

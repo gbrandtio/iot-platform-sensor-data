@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Interfaces;
 
 namespace Models
 {
-    class Humidity
+    public class Humidity : IMeasurement
     {
         #region Constructor
         public Humidity() { }
@@ -19,7 +20,7 @@ namespace Models
 
         #region Properties
         public double Measurement { get; set; }
-        public Location Location { get; set; }
+        public ILocation Location { get; set; }
         #endregion
     }
 }

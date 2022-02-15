@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Helpers;
+using Interfaces;
 using Parsers;
 
 namespace Models
@@ -20,7 +21,7 @@ namespace Models
     /// - City: The city that the location belongs to.
     /// Provides also the ability to find location info based on the provided longitude and latitude via Google Geocoding API.
     /// </summary>
-    public class Location
+    public class Location : ILocation
     {
         #region Constructor
         public Location() {}
@@ -43,17 +44,19 @@ namespace Models
         public string City { get; set; }
         #endregion
 
-        #region Private Methods
-        private string FindLocationInfo(double longitude, double latitude)
+        #region Reverse Geocoding
+        public string FindLocationInfo(double longitude, double latitude)
         {
             string localeInfo = SharedValues.UNKNOWN;
             try
             {
                 string URL = SharedValues.GEO_API_URL_LATLANG + longitude + "," + latitude + SharedValues.GEO_API_URL_KEY_PARAM + SharedValues.GL_GEO_API_KEY;
                 string response = GET.DoRequest(URL);
-                string formattedAddress = GeocodeResponseParser.GeocodeRes_ExtractFormattedAddress(response);
-                localeInfo = GeocodeResponseParser.GeocodeRes_ExtractFormattedAddressInfo(formattedAddress, SharedValues.GEO_INFO_CITY);
-                if (localeInfo.Equals(SharedValues.UNKNOWN)) localeInfo = GeocodeResponseParser.GeocodeRes_ExtractFormattedAddressInfo(formattedAddress, SharedValues.GEO_INFO_COUNTRY); 
+
+                IParser geocodeResponseParser = new GeocodeResponseParser();
+                string formattedAddress = geocodeResponseParser.ExtractData(response);
+                localeInfo = geocodeResponseParser.ExtractSpecificInfo(formattedAddress, SharedValues.GEO_INFO_CITY, ',');
+                if (localeInfo.Equals(SharedValues.UNKNOWN)) localeInfo = geocodeResponseParser.ExtractSpecificInfo(formattedAddress, SharedValues.GEO_INFO_COUNTRY, ','); 
             }
             catch (Exception e)
             {

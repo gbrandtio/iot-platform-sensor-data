@@ -45,6 +45,7 @@
     <Compile Include="Location.cs" />
     <Compile Include="P1.cs" />
     <Compile Include="P2.cs" />
+    <Compile Include="Pressure.cs" />
     <Compile Include="Temperature.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -52,6 +53,10 @@
     <ProjectReference Include="..\Helpers\Helpers.csproj">
       <Project>{06e54922-c371-4199-bd24-c197d154d2bb}</Project>
       <Name>Helpers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{3ce1ae07-28a5-4a37-814b-274c799b01ce}</Project>
+      <Name>Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Parsers\Parsers.csproj">
       <Project>{18E20006-07A4-4771-82B9-3738FFB21DFD}</Project>
