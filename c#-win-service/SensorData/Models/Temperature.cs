@@ -18,7 +18,7 @@ namespace Models
         /// on this constructor must be passed in Celsius degrees.
         /// </summary>
         /// <param name="celsiusMeasurement">The measurement of the temperature in Cesius.</param>
-        public Temperature(double celsiusMeasurement, Location location)
+        public Temperature(double celsiusMeasurement, ILocation location)
         {
             this.Measurement = celsiusMeasurement;
             this.Location = location;
@@ -26,6 +26,7 @@ namespace Models
         #endregion
 
         #region Properties
+        public string Name { get { return typeof(Humidity).Name; } }
         public double Measurement { get; set; } // Measurement of temperature supplied in Celsius degrees.
         public ILocation Location { get; set; }
         public double Kelvin

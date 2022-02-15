@@ -11,7 +11,7 @@ namespace Models
     {
         #region Constructor
         public Humidity() { }
-        public Humidity(double measurement, Location location)
+        public Humidity(double measurement, ILocation location)
         {
             this.Measurement = measurement;
             this.Location = location;
@@ -19,6 +19,7 @@ namespace Models
         #endregion
 
         #region Properties
+        public string Name { get { return typeof(Humidity).Name; } }
         public double Measurement { get; set; }
         public ILocation Location { get; set; }
         #endregion

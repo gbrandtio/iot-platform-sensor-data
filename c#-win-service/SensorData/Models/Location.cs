@@ -30,7 +30,6 @@ namespace Models
             this.Longitude = longitude;
             this.Latitude = latitude;
             this.Country = country;
-            this.City = FindLocationInfo(this.Longitude, this.Latitude);
         }
         #endregion
 
@@ -42,28 +41,6 @@ namespace Models
         public string Country { get; set; }
 
         public string City { get; set; }
-        #endregion
-
-        #region Reverse Geocoding
-        public string FindLocationInfo(double longitude, double latitude)
-        {
-            string localeInfo = SharedValues.UNKNOWN;
-            try
-            {
-                string URL = SharedValues.GEO_API_URL_LATLANG + longitude + "," + latitude + SharedValues.GEO_API_URL_KEY_PARAM + SharedValues.GL_GEO_API_KEY;
-                string response = GET.DoRequest(URL);
-
-                IParser geocodeResponseParser = new GeocodeResponseParser();
-                string formattedAddress = geocodeResponseParser.ExtractData(response);
-                localeInfo = geocodeResponseParser.ExtractSpecificInfo(formattedAddress, SharedValues.GEO_INFO_CITY, ',');
-                if (localeInfo.Equals(SharedValues.UNKNOWN)) localeInfo = geocodeResponseParser.ExtractSpecificInfo(formattedAddress, SharedValues.GEO_INFO_COUNTRY, ','); 
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
-            return localeInfo;
-        }
         #endregion
     }
 }
