@@ -87,7 +87,8 @@ namespace SensorData
         private void QueryData(object sender, ElapsedEventArgs e)
         {
             queryTimer.Stop();
-            Service.StartDataCollection(ConfigurationManager.AppSettings[SharedValues.COUNTRY_CODE]);
+            Service.StartDataCollection(ConfigurationManager.AppSettings[SharedValues.COUNTRY_CODE], 
+                ConfigurationManager.AppSettings[SharedValues.DATA_HANDLING_MODE]);
             queryTimer.Start();
         }
         #endregion
