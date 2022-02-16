@@ -30,6 +30,10 @@ namespace Helpers
         public const string COUNTRY_CODE = "CountryCode";
         public const string TIMER_INTERVAL = "TimerInterval";
         public const string SENSOR_API = "SensorAPI";
+        public const string DATA_HANDLING_MODE = "DataHandlingMode";
+        public const string DATA_CONF_ENTITY = "ENTITY";
+        public const string DATA_CONF_API = "API";
+        public const string DATA_CONF_FILE = "FILE";
 
         // Defaults
         public const string UNKNOWN = "unknown";
