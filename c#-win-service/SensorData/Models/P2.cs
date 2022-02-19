@@ -23,7 +23,7 @@ namespace Models
 
         #region Properties
         public int ID { get; set; }
-        public string Name { get { return typeof(Humidity).Name; } }
+        public string Name { get { return typeof(P2).Name; } }
         public double Measurement { get; set; }
         public ILocation Location { get; set; }
         #endregion

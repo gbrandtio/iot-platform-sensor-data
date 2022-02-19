@@ -27,7 +27,7 @@ namespace Models
 
         #region Properties
         public int ID { get; set; }
-        public string Name { get { return typeof(Humidity).Name; } }
+        public string Name { get { return typeof(Temperature).Name; } }
         public double Measurement { get; set; } // Measurement of temperature supplied in Celsius degrees.
         public ILocation Location { get; set; }
         public double Kelvin
