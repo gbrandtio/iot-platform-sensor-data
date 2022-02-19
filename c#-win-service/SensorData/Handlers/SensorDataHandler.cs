@@ -78,14 +78,35 @@ namespace Handlers
             }
             return measurements;
         }
+        #endregion
 
+        #region Data Handling Methods
+        /// <summary>
+        /// Constructs a dictionary that contains lists of objects for all IMeasurement concrete implementations.
+        /// </summary>
+        /// <param name="allMeasurements">List with different concrete objects of IMeasurement interface.</param>
+        /// <returns>Dictionary of a concrete IMeasrement implementation.</returns>
+        public Dictionary<Type, List<IMeasurement>> GetSeparatedMeasurementLists(List<IMeasurement> allMeasurements)
+        {
+            // Construct each list
+            List<Type> types = GetIMeasurementTypes();
+            Dictionary<Type, List<IMeasurement>> dicSeparatedLists = new Dictionary<Type, List<IMeasurement>>();
+            foreach (Type type in types)
+            {
+                dicSeparatedLists.Add(type, GetSpecificMeasurementObjectList(allMeasurements, type));
+            }
+            return dicSeparatedLists;
+        }
+        #endregion
+
+        #region Private Methods
         /// <summary>
         /// Given a type, returns all the objects inside a list that are a concrete implementation of this type.
         /// </summary>
         /// <param name="measurements">List of measurements to get objects from.</param>
         /// <param name="type">Type of objects to add to the return list.</param>
         /// <returns>List of objects with the specified type</returns>
-        public List<IMeasurement> GetSpecificMeasurementObjectList(List<IMeasurement> measurements, Type type)
+        private List<IMeasurement> GetSpecificMeasurementObjectList(List<IMeasurement> measurements, Type type)
         {
             List<IMeasurement> specificMeasurementObjectList = null;
             foreach (IMeasurement measurement in measurements)
@@ -94,12 +115,9 @@ namespace Handlers
             }
             return specificMeasurementObjectList;
         }
-        #endregion
-
-        #region Private Methods
         private dynamic Instantiate(string type, double measurementValue, ILocation location)
         {
-            Type[] types = Assembly.GetExecutingAssembly().GetTypes();
+            List<Type> types = GetIMeasurementTypes();
             foreach (Type assemblyType in types)
             {
                 if (assemblyType.Name.ToLower().Equals(type.ToLower()))
@@ -108,6 +126,14 @@ namespace Handlers
                 }
             }
             return null;
+        }
+
+        private static List<Type> GetIMeasurementTypes()
+        {
+            return Assembly.GetExecutingAssembly()
+                .GetExportedTypes()
+                .Where(type => type.GetInterfaces().Contains(typeof(IMeasurement)))
+                .ToList();
         }
         #endregion
     }

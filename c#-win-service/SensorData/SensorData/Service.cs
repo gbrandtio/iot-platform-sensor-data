@@ -36,19 +36,12 @@ namespace SensorData
 
             // Add the city info on each IMeasurement object.
             GeocodeDataHandler geocodeDataHandler = new GeocodeDataHandler();
-            foreach (IMeasurement measurement in allMeasurements)
-            {
-                if (measurement != null)
-                    measurement.Location.City = geocodeDataHandler.FindLocationInfo(measurement.Location.Longitude, measurement.Location.Latitude);
-            }
+            geocodeDataHandler.AddLocationInfo(allMeasurements);
 
             // Get separate lists for each measurement type. Will help us store different measurement types to their respective tables.
-            List<IMeasurement> humidityMeasurements = sensorDataHandler.GetSpecificMeasurementObjectList(allMeasurements, typeof(Humidity));
-            List<IMeasurement> p1Measurements = sensorDataHandler.GetSpecificMeasurementObjectList(allMeasurements, typeof(P1));
-            List<IMeasurement> p2Measurements = sensorDataHandler.GetSpecificMeasurementObjectList(allMeasurements, typeof(Pressure));
-            List<IMeasurement> pressureMeasurements = sensorDataHandler.GetSpecificMeasurementObjectList(allMeasurements, typeof(IMeasurement));
+            Dictionary<Type, List<IMeasurement>> dicSeparatedMeasurements = sensorDataHandler.GetSeparatedMeasurementLists(allMeasurements);
 
-            // Save the data to the database.
+            // Save the data based on the configured method.
             if (dataHandlingMode.Equals(SharedValues.DATA_CONF_ENTITY))
             {
                 // Save data to the database that is specified by Entity Framework config.

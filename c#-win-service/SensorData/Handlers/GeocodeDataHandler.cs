@@ -20,7 +20,7 @@ namespace Handlers
         /// <returns>The requested info from the formatted address</returns>
         public string ExtractData(string json, int pos, char delimeter) 
         {
-            string formattedAddress = GeocodeRes_ExtractFormattedAddress(json);
+            string formattedAddress = ExtractFormattedAddress(json);
             string requestedAddressComponent = SharedValues.UNKNOWN;
             try
             {
@@ -39,7 +39,7 @@ namespace Handlers
         /// </summary>
         /// <param name="response">Geocode API response</param>
         /// <returns>The formatted_address value as a string</returns>
-        private string GeocodeRes_ExtractFormattedAddress(string response)
+        private string ExtractFormattedAddress(string response)
         {
             string formattedAddress = SharedValues.UNKNOWN;
             try
@@ -54,6 +54,17 @@ namespace Handlers
             }
             return formattedAddress;
         }
+        #endregion
+        public void AddLocationInfo(List<IMeasurement> allMeasurements)
+        {
+            foreach (IMeasurement measurement in allMeasurements)
+            {
+                if (measurement != null)
+                    measurement.Location.City = FindLocationInfo(measurement.Location.Longitude, measurement.Location.Latitude);
+            }
+        }
+        #region Data Handling Methods
+
         #endregion
 
         #region Reverse Geocoding
