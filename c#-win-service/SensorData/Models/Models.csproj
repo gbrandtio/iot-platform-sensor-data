@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,7 +47,6 @@
     <Compile Include="Config Models\FileExtensions.cs" />
     <Compile Include="Config Models\StorageMethod.cs" />
     <Compile Include="Config Models\Strings.cs" />
-    <Compile Include="DataStorageMethod.cs" />
     <Compile Include="Humidity.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="P1.cs" />
