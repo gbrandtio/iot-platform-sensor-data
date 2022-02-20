@@ -1,5 +1,5 @@
-﻿using Helpers;
-using Interfaces;
+﻿using Interfaces;
+using Models.Config_Models;
 using Newtonsoft.Json.Linq;
 using RestClient;
 using System;
@@ -21,7 +21,7 @@ namespace Handlers
         public string ExtractData(string json, int pos, char delimeter) 
         {
             string formattedAddress = ExtractFormattedAddress(json);
-            string requestedAddressComponent = SharedValues.UNKNOWN;
+            string requestedAddressComponent = Strings.String.Unknown.Value;
             try
             {
                 string[] addrArray = formattedAddress.Split(delimeter);
@@ -41,12 +41,12 @@ namespace Handlers
         /// <returns>The formatted_address value as a string</returns>
         private string ExtractFormattedAddress(string response)
         {
-            string formattedAddress = SharedValues.UNKNOWN;
+            string formattedAddress = Strings.String.Unknown.Value;
             try
             {
                 JObject jResponse = JObject.Parse(response);
-                JArray jResultsArray = (JArray)jResponse[SharedValues.ARRAY_RESULTS];
-                formattedAddress = jResultsArray[0][SharedValues.FORMATTED_ADDRESS].ToString();
+                JArray jResultsArray = (JArray)jResponse[Strings.String.Results.Value];
+                formattedAddress = jResultsArray[0][Strings.Geocode.FormattedAddress.Value].ToString();
             }
             catch (Exception e)
             {

@@ -45,6 +45,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -55,9 +56,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataStorageHandler.cs" />
-    <Compile Include="EFHandlers\MeasurementsDbContext.cs" />
-    <Compile Include="EFHandlers\MeasurementsDbDataHandler.cs" />
-    <Compile Include="EFHandlers\MeasurementsDbInitializer.cs" />
     <Compile Include="GeocodeDataHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SensorDataHandler.cs" />
@@ -67,9 +65,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Helpers\Helpers.csproj">
-      <Project>{06E54922-C371-4199-BD24-C197D154D2BB}</Project>
-      <Name>Helpers</Name>
+    <ProjectReference Include="..\DbClient\DbClient.csproj">
+      <Project>{E226C332-C404-4D22-B19B-0279E5A37480}</Project>
+      <Name>DbClient</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{3CE1AE07-28A5-4A37-814B-274C799B01CE}</Project>

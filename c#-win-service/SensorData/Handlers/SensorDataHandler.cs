@@ -1,6 +1,6 @@
-﻿using Helpers;
-using Interfaces;
+﻿using Interfaces;
 using Models;
+using Models.Config_Models;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -36,32 +36,32 @@ namespace Handlers
                 IMeasurement measurement = null;
                 ILocation location;
 
-                string country = SharedValues.UNKNOWN;
+                string country = Strings.String.Unknown.Value;
                 double longitude = 0;
                 double latitude = 0;
-                string measurementName = SharedValues.UNKNOWN;
+                string measurementName = Strings.String.Unknown.Value;
                 double measurementValue = 0;
 
                 JArray jResultsArray = JArray.Parse(json);
                 foreach (JObject obj in jResultsArray)
                 {
                     // Extract location.
-                    JToken jLocation = (JObject)obj.GetValue(SharedValues.LOCATION);
+                    JToken jLocation = (JObject)obj.GetValue(Strings.String.Location.Value);
                     foreach (JProperty locationProperty in jLocation)
                     {
-                        if (locationProperty.Name.Equals(SharedValues.COUNTRY)) country = locationProperty.Value.ToString();
-                        if (locationProperty.Name.Equals(SharedValues.LONGITUDE)) longitude = double.Parse(locationProperty.Value.ToString());
-                        if (locationProperty.Name.Equals(SharedValues.LATITUDE)) latitude = double.Parse(locationProperty.Value.ToString());
+                        if (locationProperty.Name.Equals(Strings.String.Country.Value)) country = locationProperty.Value.ToString();
+                        if (locationProperty.Name.Equals(Strings.String.Longitude.Value)) longitude = double.Parse(locationProperty.Value.ToString());
+                        if (locationProperty.Name.Equals(Strings.String.Latitude)) latitude = double.Parse(locationProperty.Value.ToString());
                     }
 
                     // Extract sensor data values
-                    JArray sensorDataValues = (JArray)obj.GetValue(SharedValues.SENSOR_DATA_VALUES);
+                    JArray sensorDataValues = (JArray)obj.GetValue(Strings.Sensor.SensorDataValues.Value);
                     foreach (JObject sensorValue in sensorDataValues)
                     {
-                        if (sensorValue.ContainsKey(SharedValues.VALUE_TYPE))
+                        if (sensorValue.ContainsKey(Strings.Sensor.ValueType.Value))
                         {
-                            measurementName = sensorValue.GetValue(SharedValues.VALUE_TYPE).ToString();
-                            measurementValue = double.Parse(sensorValue.GetValue(SharedValues.VALUE).ToString());
+                            measurementName = sensorValue.GetValue(Strings.Sensor.ValueType.Value).ToString();
+                            measurementValue = double.Parse(sensorValue.GetValue(Strings.String.ValueR.Value).ToString());
                         }
                     }
 
