@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Handlers;
-using Helpers;
 using Interfaces;
 using Models;
+using Models.Config_Models;
 using RestClient;
 
 namespace SensorData
@@ -25,10 +25,10 @@ namespace SensorData
         /// </summary>
         /// <param name="countryCode">The 2-letter configured country code to retrieve data from.</param>
         /// <param name="dataHandlingMode">The configured mode to handle the data (save them to database, send them to API)</param>
-        public static void StartDataCollection(string countryCode, string dataHandlingMode)
+        public static void StartDataCollection(string countryCode)
         {
             // Retrieve the data from the SensorAPI.
-            string sensorDataResponse = GET.DoRequest(SharedValues.SENSOR_API + countryCode);
+            string sensorDataResponse = GET.DoRequest(Strings.Sensor.SensorApi + countryCode);
 
             // Parse the data and transform them.
             SensorDataHandler sensorDataHandler = new SensorDataHandler();
@@ -41,21 +41,9 @@ namespace SensorData
             // Get separate lists for each measurement type. Will help us store different measurement types to their respective tables.
             Dictionary<Type, List<IMeasurement>> dicSeparatedMeasurements = sensorDataHandler.GetSeparatedMeasurementLists(allMeasurements);
 
-            // Save the data based on the configured method.
-            if (dataHandlingMode.Equals(SharedValues.DATA_CONF_ENTITY))
-            {
-                // Save data to the database that is specified by Entity Framework config.
-            }
-            else if (dataHandlingMode.Equals(SharedValues.DATA_CONF_API))
-            {
-                // Send data to the configured API and let the API store them in the database.
-                throw new NotImplementedException();
-            }
-            else if (dataHandlingMode.Equals(SharedValues.DATA_CONF_FILE))
-            {
-                // Format the data and write them to the configured file.
-                throw new NotImplementedException();
-            }
+            // Save the data.
+            DataStorageHandler dataStorageHandler = new DataStorageHandler();
+            dataStorageHandler.StoreData(dicSeparatedMeasurements);
         }
     }
 }
