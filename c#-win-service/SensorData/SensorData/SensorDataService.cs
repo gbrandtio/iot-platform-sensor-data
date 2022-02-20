@@ -10,7 +10,7 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
-using Helpers;
+using Models.Config_Models;
 
 namespace SensorData
 {
@@ -66,7 +66,7 @@ namespace SensorData
         {
             queryTimer = new Timer();
             queryTimer.Elapsed += QueryData;
-            queryTimer.Interval = int.Parse(ConfigurationManager.AppSettings[SharedValues.TIMER_INTERVAL]);
+            queryTimer.Interval = int.Parse(ConfigurationManager.AppSettings[Strings.Config.TimerInterval.Value]);
             queryTimer.Enabled = true;
         }
 
@@ -87,8 +87,7 @@ namespace SensorData
         private void QueryData(object sender, ElapsedEventArgs e)
         {
             queryTimer.Stop();
-            Service.StartDataCollection(ConfigurationManager.AppSettings[SharedValues.COUNTRY_CODE], 
-                ConfigurationManager.AppSettings[SharedValues.DATA_HANDLING_MODE]);
+            Service.StartDataCollection(ConfigurationManager.AppSettings[Strings.Config.CountryCode.Value]);
             queryTimer.Start();
         }
         #endregion
