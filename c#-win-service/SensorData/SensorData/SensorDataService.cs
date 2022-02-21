@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using Models.Config_Models;
+using System.Reflection;
+using Handlers;
 
 namespace SensorData
 {
@@ -34,17 +36,19 @@ namespace SensorData
         /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
-            SharedValues.GL_GEO_API_KEY = ConfigurationManager.AppSettings[SharedValues.GEO_API_KEY];
+            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, "App started", Log.Severity.Info));
             StartTimer();
         }
 
         protected override void OnContinue()
         {
+            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, "App continued", Log.Severity.Info));
             StartTimer();
             base.OnContinue();
         }
         protected override void OnStop()
         {
+            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name,"App stopped", Log.Severity.Info));
             StopTimer();
             base.Dispose();
             base.OnStop();
@@ -52,6 +56,7 @@ namespace SensorData
 
         protected override void OnPause()
         {
+            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, "App paused", Log.Severity.Info));
             StopTimer();
             base.OnPause();
         }
@@ -87,7 +92,8 @@ namespace SensorData
         private void QueryData(object sender, ElapsedEventArgs e)
         {
             queryTimer.Stop();
-            Service.StartDataCollection(ConfigurationManager.AppSettings[Strings.Config.CountryCode.Value]);
+            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, "New query loop.", Log.Severity.Info));
+            Service.StartDataCollection();
             queryTimer.Start();
         }
         #endregion

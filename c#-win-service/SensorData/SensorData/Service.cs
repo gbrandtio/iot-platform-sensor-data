@@ -5,33 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using Handlers;
 using Interfaces;
-using Models;
-using Models.Config_Models;
-using RestClient;
 
 namespace SensorData
 {
-    /// <summary>
-    /// Controls the main flow of the service. The main logic is as follows:
-    /// 
-    /// 1. Fetch the data from the provided sensor API.
-    /// 2. Parse the response data and transform them.
-    /// 3. Save the data to the respective table in the database / send them to the configured API.
-    /// </summary>
     public class Service
     {
         /// <summary>
-        /// The entry point of the program. Implements the main flow of the service and the logic that is being followed.
+        /// Controls the main flow of the service.
+        /// The entry point of the program. Implements the main flow of the service to request/retrieve/store the data.
         /// </summary>
-        /// <param name="countryCode">The 2-letter configured country code to retrieve data from.</param>
-        /// <param name="dataHandlingMode">The configured mode to handle the data (save them to database, send them to API)</param>
-        public static void StartDataCollection(string countryCode)
+        public static void StartDataCollection()
         {
+            SensorDataHandler sensorDataHandler = new SensorDataHandler();
             // Retrieve the data from the SensorAPI.
-            string sensorDataResponse = GET.DoRequest(Strings.Sensor.SensorApi + countryCode);
+            string sensorDataResponse = sensorDataHandler.RetrieveSensorDataValues();
 
             // Parse the data and transform them.
-            SensorDataHandler sensorDataHandler = new SensorDataHandler();
             List<IMeasurement> allMeasurements = sensorDataHandler.ExtractSensorDataValues(sensorDataResponse);
 
             // Add the city info on each IMeasurement object.
