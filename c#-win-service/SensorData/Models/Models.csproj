@@ -49,6 +49,7 @@
     <Compile Include="Config Models\Strings.cs" />
     <Compile Include="Humidity.cs" />
     <Compile Include="Location.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="P1.cs" />
     <Compile Include="P2.cs" />
     <Compile Include="Pressure.cs" />
