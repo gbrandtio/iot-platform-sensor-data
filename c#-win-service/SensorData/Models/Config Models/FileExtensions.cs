@@ -10,6 +10,8 @@ namespace Models.Config_Models
     {
         // File Extensions
         private const string R_EXE_CONFIG = ".exe.config";
+        private const string R_TXT = ".txt";
+        private const string R_CSV = ".csv";
         private FileExtensions(string value)
         {
             this.InternalValue = value;
@@ -17,5 +19,7 @@ namespace Models.Config_Models
 
         public string InternalValue { get; private set; }
         public static FileExtensions ExeConfig { get { return new FileExtensions(R_EXE_CONFIG); } }
+        public static FileExtensions Txt { get { return new FileExtensions(R_TXT); } }
+        public static FileExtensions Csv { get { return new FileExtensions(R_CSV); } }
     }
 }

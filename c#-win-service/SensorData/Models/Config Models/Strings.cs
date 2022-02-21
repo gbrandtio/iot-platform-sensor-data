@@ -44,7 +44,7 @@ namespace Models.Config_Models
             public string Value { get; private set; }
             public int ValueInt { get; private set; }
             public static Geocode GeocodeURL { get { return new Geocode(R_GEOURL_LATLANG); } }
-            public static Geocode URLKeyParam { get { return new Geocode(R_GEO_API_KEY); } }
+            public static Geocode URLKeyParam { get { return new Geocode(R_URL_KEY_PARAM); } }
             public static Geocode FormattedAddress { get { return new Geocode(R_FORMATTED_ADDRESS); } }
             public static Geocode InfoCity { get { return new Geocode(G_GEO_INFO_CITY); } }
             public static Geocode InfoCountry { get { return new Geocode(G_GEO_INFO_COUNTRY); } }
@@ -70,12 +70,20 @@ namespace Models.Config_Models
                 this.Value = value;
             }
 
+            public Config(long value)
+            {
+                this.ValueLong = value;
+            }
             public string Value { get; private set; }
-            public static Config GeoApiKey { get { return new Config(R_GEO_API_KEY); } }
+            public long ValueLong { get; private set; }
+            public static Config GeoApiKey { get { return new Config(ConfigurationManager.AppSettings[R_GEO_API_KEY]); } }
             public static Config CountryCode { get { return new Config(R_COUNTRY_CODE); } }
             public static Config TimerInterval { get { return new Config(R_TIMER_INTERVAL); } }
             public static Config DataStorageMode { get { return new Config(R_DATA_STORAGE_MODE); } }
             public static Config DataStorageMethod { get { return new Config(R_DATA_STORAGE_METHOD); } }
+            public static Config LogPath { get { return new Config(ConfigurationManager.AppSettings[R_LOGPATH]); } }
+            public static Config DataFilePath { get { return new Config(ConfigurationManager.AppSettings[R_DATA_FILE_PATH]); } }
+            public static Config MaxFileSize { get { return new Config(long.Parse(ConfigurationManager.AppSettings[R_MAX_FILESIZE])); } }
         }
     }
 }
