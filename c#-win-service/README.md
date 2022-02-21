@@ -16,7 +16,7 @@ The main configuration of the application is located in `SensorData/app.config` 
 - `CountryCode`: The 2-letter country code that you want to collect data from.
 - `SensorAPI`: The API that publishes the data from the sensors. Documentation: https://github.com/opendata-stuttgart/meta/wiki/EN-APIs
 - `DataStorageMode`: The data storage method to be used. This value should equal to one of the `DataStorageMode`.
-- `DataStorageMode`: The available data storage modes. This modes cannot be changed or extended - you can configure one of them in `DataStorageMethod`.
+- `DataStorageMethod`: The available data storage modes. This modes cannot be changed or extended - you can configure one of them in `DataStorageMethod`.
 - `FileStorageFormat`: If the `DataStorageMode` is set to `FILE`, this configuration specifies the file format of the file that will hold the data.
 - `MaxFileSize`: If the `DataStorageMode` is set to `FILE`, this configuration specifies the maximum file size before a new file gets created.
 
