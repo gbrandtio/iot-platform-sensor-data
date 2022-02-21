@@ -70,14 +70,14 @@ namespace Handlers
         #region Reverse Geocoding
         public string FindLocationInfo(double longitude, double latitude)
         {
-            string localeInfo = SharedValues.UNKNOWN;
+            string localeInfo = Strings.String.Unknown.Value;
             try
             {
-                string URL = SharedValues.GEO_API_URL_LATLANG + longitude + "," + latitude + SharedValues.GEO_API_URL_KEY_PARAM + SharedValues.GL_GEO_API_KEY;
+                string URL = Strings.Geocode.GeocodeURL.Value + longitude + "," + latitude + Strings.Geocode.URLKeyParam + Strings.Config.GeoApiKey;
                 string response = GET.DoRequest(URL);
 
-                localeInfo = ExtractData(response, SharedValues.GEO_INFO_CITY, ',');
-                if (localeInfo.Equals(SharedValues.UNKNOWN)) localeInfo = ExtractData(response, SharedValues.GEO_INFO_COUNTRY, ',');
+                localeInfo = ExtractData(response, Strings.Geocode.InfoCity.ValueInt, ',');
+                if (localeInfo.Equals(Strings.String.Unknown.Value)) localeInfo = ExtractData(response, Strings.Geocode.InfoCountry.ValueInt, ',');
             }
             catch (Exception e)
             {

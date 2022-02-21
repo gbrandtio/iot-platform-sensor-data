@@ -1,11 +1,11 @@
-﻿using Handlers.EFHandlers;
-using Interfaces;
+﻿using Interfaces;
 using Models;
 using Models.Config_Models;
+using Services.DbClient;
+using Services.FileClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.Entity;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -106,7 +106,7 @@ namespace Handlers
         /// <param name="measurements"></param>
         private void ENTITY(Dictionary<Type, List<IMeasurement>> measurements)
         {
-            MeasurementsDbDataHandler dbDataHandler = new MeasurementsDbDataHandler();
+            MeasurementsDbDataService dbDataHandler = new MeasurementsDbDataService();
             dbDataHandler.Insert(measurements);
         }
 
@@ -127,7 +127,8 @@ namespace Handlers
         /// <param name="measurements"></param>
         private void FILE(Dictionary<Type, List<IMeasurement>> measurements)
         {
-            throw new NotImplementedException();
+            FileDataService fileService = new FileDataService();
+            fileService.Store(measurements);
         }
         #endregion
     }

@@ -2,6 +2,7 @@
 using Models;
 using Models.Config_Models;
 using Newtonsoft.Json.Linq;
+using RestClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,10 @@ namespace Handlers
         #endregion
 
         #region Data Extractor Methods
+        public string RetrieveSensorDataValues()
+        {
+            return GET.DoRequest(Strings.Sensor.SensorApi + Strings.Config.CountryCode.Value);
+        }
         /// <summary>
         /// Iterates through the json response of the sensor API and tries to extract the required measurements
         /// and the location of each sensor.
