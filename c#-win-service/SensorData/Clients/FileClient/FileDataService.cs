@@ -78,7 +78,7 @@ namespace Services.FileClient
 
             try
             {
-                logPath = logPath + "-" + DateTime.Now.Date.ToString() + FileExtensions.Csv;
+                logPath = logPath + "log" + "-" + DateTime.Now.Date.ToString() + FileExtensions.Csv;
                 File.Create(logPath);
             }
             catch (Exception e)
