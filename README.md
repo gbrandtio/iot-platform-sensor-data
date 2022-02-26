@@ -9,3 +9,7 @@ Inside node-red subfolder you can find the implementation of the specifications 
 
 ## ./c#-win-service
 Windows Service to collect the sensor data and periodically store them in a database. For installation steps and documentation read `./c#-win-service/README`.
+
+## ./API
+A NodeJS RESTful API that provides all the required endpoints to add, get, remove the environmental data retrieved from the sensors. For documentation read
+`./API/README.md`.
