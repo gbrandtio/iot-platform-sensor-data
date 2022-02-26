@@ -60,7 +60,7 @@ namespace Models.Config_Models
             public string Value { get; private set; }
             public static Sensor SensorApi { get { return new Sensor(ConfigurationManager.AppSettings[R_SENSOR_API]); } }
             public static Sensor SensorDataValues { get { return new Sensor(R_SENSOR_DATA_VALUES); } }
-            public static Sensor ValueType { get { return new Sensor(R_VALUE); } }
+            public static Sensor ValueType { get { return new Sensor(R_VALUE_TYPE); } }
         }
 
         public partial class Config : Constants
