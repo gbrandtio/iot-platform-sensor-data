@@ -31,7 +31,7 @@
             // 
             // SensorDataService
             // 
-            this.ServiceName = "Service1";
+            this.ServiceName = "SensorDataService";
 
         }
 
