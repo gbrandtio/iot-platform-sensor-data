@@ -22,3 +22,15 @@ The main configuration of the application is located in `SensorData/app.config` 
 
 ### Connection Strings
 `MsrmntsDBConnectionString`: The path (remote or local) where the Entity framework will create and update the database.
+
+## Installation
+In order to install the service locally you need to follow the below steps:
+- Download the latest release, which you can find inside the `Deliverables` folder.
+- `sc create SensorDataService binpath='..path\to\SensorData.exe' start=auto`
+- `sc start`
+
+If you have already installed the service, but you want to install a newer release version:
+- `sc stop SensorDataService`
+- `sc delete SensorDataService`
+- `sc create SensorDataService binpath='..path\to\new\SensorData.exe start=auto`
+- `sc start SensorDataService`
