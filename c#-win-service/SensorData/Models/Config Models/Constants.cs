@@ -24,7 +24,7 @@ namespace Models.Config_Models
         protected const string R_COUNTRY_CODE = "CountryCode";
         protected const string R_TIMER_INTERVAL = "TimerInterval";
         protected const string R_SENSOR_API = "SensorAPI";
-        protected const string R_DATA_STORAGE_MODE = "DataHandlingMode";
+        protected const string R_DATA_STORAGE_MODE = "DataStorageMode";
         protected const string R_DATA_STORAGE_METHOD = "DataStorageMethod";
         protected const string R_LOGPATH = "LogPath";
         protected const string R_MAX_FILESIZE = "MaxFileSize";
