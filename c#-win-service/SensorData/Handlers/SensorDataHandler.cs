@@ -113,10 +113,11 @@ namespace Handlers
         /// <returns>List of objects with the specified type</returns>
         private List<IMeasurement> GetSpecificMeasurementObjectList(List<IMeasurement> measurements, Type type)
         {
-            List<IMeasurement> specificMeasurementObjectList = null;
+            List<IMeasurement> specificMeasurementObjectList = new List<IMeasurement>();
             foreach (IMeasurement measurement in measurements)
             {
-                if (type == measurement.GetType()) specificMeasurementObjectList.Add(measurement);
+                if (measurement != null)
+                    if (type == measurement.GetType()) specificMeasurementObjectList.Add(measurement);
             }
             return specificMeasurementObjectList;
         }
@@ -135,10 +136,7 @@ namespace Handlers
 
         private static List<Type> GetIMeasurementTypes()
         {
-            return Assembly.GetExecutingAssembly()
-                .GetExportedTypes()
-                .Where(type => type.GetInterfaces().Contains(typeof(IMeasurement)))
-                .ToList();
+            return Assembly.UnsafeLoadFrom("Models.dll").GetTypes().ToList();
         }
         #endregion
     }
