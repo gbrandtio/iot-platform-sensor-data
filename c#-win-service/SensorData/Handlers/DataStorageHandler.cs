@@ -73,7 +73,7 @@ namespace Handlers
             string currentProccessName = Process.GetCurrentProcess().ProcessName;
             string appConfigFilePath = Directory.GetCurrentDirectory() + "\\" + currentProccessName + FileExtensions.ExeConfig;
             XDocument doc = XDocument.Load(appConfigFilePath);
-            var result = doc.Descendants(Strings.String.AppSettings.Value).Descendants(Strings.String.Add.ToString()).Attributes(Strings.String.Key.Value);
+            var result = doc.Descendants(Strings.String.AppSettings.Value).Descendants(Strings.String.Add.Value).Attributes(Strings.String.Key.Value);
 
             // Add all storage methods to the returning list.
             foreach (var item in result)
