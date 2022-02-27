@@ -23,6 +23,14 @@ The main configuration of the application is located in `SensorData/app.config` 
 ### Connection Strings
 `MsrmntsDBConnectionString`: The path (remote or local) where the Entity framework will create and update the database.
 
+## Flow
+The main flow that the application follows (high level) is explained below and is implemented in `SensorData\Service.cs`:
+1. Retrieve the sensor data from the API.
+2. Parse the data and save them into meaningful objects.
+3. Add location specific info via reverse Geocoding (Geocoding API).
+4. Separate the saved data into discrete lists. Each list represents a measurement type.
+5. Save the data using the configured data handling method.
+
 ## Installation
 In order to install the service locally you need to follow the below steps:
 - Download the latest release, which you can find inside the `Deliverables` folder.
