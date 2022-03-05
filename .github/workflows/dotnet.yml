@@ -1,4 +1,4 @@
-name: Windows Service
+name: Windows Service CI
 
 on:
   push:
