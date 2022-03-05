@@ -30,3 +30,6 @@ jobs:
       
     - name: Test Models
       run: vstest.console c#-win-service\SensorData\Tests\ModelTests\bin\Release\ModelTests.dll
+      
+    - name: Test Handlers
+      run: vstest.console c#-win-service\SensorData\Tests\HandlerTests\bin\Release\HandlerTests.dll
