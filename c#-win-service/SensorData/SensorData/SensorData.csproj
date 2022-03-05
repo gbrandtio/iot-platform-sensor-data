@@ -73,6 +73,10 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Constants\Constants.csproj">
+      <Project>{D889581F-32DE-47CE-9638-825E75C8FDAD}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Handlers\Handlers.csproj">
       <Project>{18e20006-07a4-4771-82b9-3738ffb21dfd}</Project>
       <Name>Handlers</Name>
@@ -82,7 +86,7 @@
       <Name>Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{e3dc6f5e-ae15-4f71-8698-f7d6289c1eb8}</Project>
+      <Project>{E3DC6F5E-AE15-4F71-8698-F7D6289C1EB8}</Project>
       <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
