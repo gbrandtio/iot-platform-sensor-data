@@ -18,6 +18,7 @@ namespace Services.FileClient
     public class FileDataService
     {
         private string currentFilePath = String.Empty;
+        private static bool isAppendMode = false;
         public void Store(Dictionary<Type, List<IMeasurement>> measurements)
         {
             if (FileLimitExceeded(currentFilePath) || String.IsNullOrEmpty(currentFilePath)) currentFilePath = CreateFile(Strings.Config.DataFilePath.Value);
@@ -51,35 +52,21 @@ namespace Services.FileClient
         }
 
         /// <summary>
-        /// A new log file is created every 24:00.
-        /// This is to avoid huge log files as well as to be able to get specific logs
-        /// in case of system failure.
-        /// </summary>
-        /// <returns>True is midnight and we need to create a new log file.</returns>
-        public static bool CheckFileCutoff()
-        {
-            bool isTimeToCutoff = false;
-            if (DateTime.Now.TimeOfDay > new TimeSpan(24, 0, 0))
-            {
-                isTimeToCutoff = true;
-            }
-            return isTimeToCutoff;
-        }
-
-        /// <summary>
         /// Created a new log file in the configured directory.
         /// </summary>
         /// <param name="logMethod">The log method: could be either for app logs or for data storage.</param>
         /// <returns>The path of the new log file.</returns>
-        public static string CreateFile(string logMethod)
+        private static string CreateFile(string logPath)
         {
-            string logPath = Strings.Config.DataFilePath.Value;
-            if (logMethod.Equals(Strings.Config.LogPath.Value)) logPath = Strings.Config.LogPath.Value;
-
             try
             {
-                logPath = logPath + "log" + "-" + DateTime.Now.Date.ToString() + FileExtensions.Csv;
-                File.Create(logPath);
+                logPath = logPath + "log" + "-" + DateTime.Now.Date.ToString("yyyyMMdd") + FileExtensions.Csv.InternalValue;
+                isAppendMode = true;
+                if (!File.Exists(logPath))
+                {
+                    isAppendMode = false;
+                    File.Create(logPath).Close();
+                }
             }
             catch (Exception e)
             {
@@ -93,14 +80,17 @@ namespace Services.FileClient
         /// <param name="data">The data to write.</param>
         /// <param name="path">The path of the log file.</param>
         /// <returns></returns>
-        public static bool Write(Log data, string path)
+        public static bool Write(Log data)
         {
+            string path = CreateFile(Strings.Config.LogPath.Value);
             bool isDataLogged = false;
             try
             {
                 using (var writer = new StreamWriter(path))
                 using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
+                    csv.WriteHeader<Log>();
+                    csv.NextRecord();
                     csv.WriteRecord(data);
                     csv.NextRecord();
                 }
