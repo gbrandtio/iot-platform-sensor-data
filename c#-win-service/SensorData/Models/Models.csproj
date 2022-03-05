@@ -45,6 +45,8 @@
   <ItemGroup>
     <Compile Include="Config Models\Constants.cs" />
     <Compile Include="Config Models\FileExtensions.cs" />
+    <Compile Include="Config Models\FileExtensions.cs" />
+    <Compile Include="Config Models\StorageMethod.cs" />
     <Compile Include="Config Models\StorageMethod.cs" />
     <Compile Include="Config Models\Strings.cs" />
     <Compile Include="Humidity.cs" />
