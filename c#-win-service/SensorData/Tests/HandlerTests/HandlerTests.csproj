@@ -84,6 +84,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Constants\Constants.csproj">
+      <Project>{d889581f-32de-47ce-9638-825e75c8fdad}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Handlers\Handlers.csproj">
       <Project>{18e20006-07a4-4771-82b9-3738ffb21dfd}</Project>
       <Name>Handlers</Name>
