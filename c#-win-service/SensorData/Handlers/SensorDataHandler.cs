@@ -3,6 +3,7 @@ using Interfaces;
 using Models;
 using Newtonsoft.Json.Linq;
 using RestClient;
+using RestService;
 using System;
 using System.Collections.Generic;
 using System.Linq;

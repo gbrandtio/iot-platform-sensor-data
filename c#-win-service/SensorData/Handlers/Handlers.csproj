@@ -54,18 +54,6 @@
     <Compile Include="SensorDataHandler.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Clients\DbClient\DbService.csproj">
-      <Project>{e226c332-c404-4d22-b19b-0279e5a37480}</Project>
-      <Name>DbService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Clients\FileClient\FileService.csproj">
-      <Project>{e0ac0f2c-b749-4143-812a-4c778de1dbe7}</Project>
-      <Name>FileService</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Clients\RestClient\RestService.csproj">
-      <Project>{94511d84-c198-4368-b6be-c59fa058da84}</Project>
-      <Name>RestService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Constants\Constants.csproj">
       <Project>{D889581F-32DE-47CE-9638-825E75C8FDAD}</Project>
       <Name>Constants</Name>
@@ -77,6 +65,18 @@
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{E3DC6F5E-AE15-4F71-8698-F7D6289C1EB8}</Project>
       <Name>Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\DbService\DbService.csproj">
+      <Project>{e226c332-c404-4d22-b19b-0279e5a37480}</Project>
+      <Name>DbService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\FileService\FileService.csproj">
+      <Project>{e0ac0f2c-b749-4143-812a-4c778de1dbe7}</Project>
+      <Name>FileService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Services\RestService\RestService.csproj">
+      <Project>{94511d84-c198-4368-b6be-c59fa058da84}</Project>
+      <Name>RestService</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

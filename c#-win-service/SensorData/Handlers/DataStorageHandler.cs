@@ -1,7 +1,7 @@
 ﻿using Constants;
 using Interfaces;
-using Services.DbClient;
-using Services.FileClient;
+using Services.DbService;
+using Services.FileService;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
