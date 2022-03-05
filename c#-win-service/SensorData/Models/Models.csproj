@@ -43,12 +43,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config Models\Constants.cs" />
-    <Compile Include="Config Models\FileExtensions.cs" />
-    <Compile Include="Config Models\FileExtensions.cs" />
-    <Compile Include="Config Models\StorageMethod.cs" />
-    <Compile Include="Config Models\StorageMethod.cs" />
-    <Compile Include="Config Models\Strings.cs" />
     <Compile Include="Humidity.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="Log.cs" />
@@ -59,6 +53,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Constants\Constants.csproj">
+      <Project>{D889581F-32DE-47CE-9638-825E75C8FDAD}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{3ce1ae07-28a5-4a37-814b-274c799b01ce}</Project>
       <Name>Interfaces</Name>
