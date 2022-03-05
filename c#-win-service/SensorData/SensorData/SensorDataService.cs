@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Reflection;
 using Constants;
+using Interfaces;
+using Factories;
 
 namespace SensorData
 {
@@ -86,7 +88,10 @@ namespace SensorData
         private void QueryData(object sender, ElapsedEventArgs e)
         {
             queryTimer.Stop();
-            Service.StartDataCollection();
+            IDataHandler sensorDataHandler = new SensorDataHandlerFactory().GetDataHandler();
+            IDataHandler geocodeDataHandler = new GeocodeDataHandlerFactory().GetDataHandler();
+            IDataHandler dataStorageHandler = new DataStorageHandlerFactory().GetDataHandler();
+            Service.StartDataCollection(sensorDataHandler, geocodeDataHandler, dataStorageHandler);
             queryTimer.Start();
         }
         #endregion
