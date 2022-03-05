@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace Models
 {
+    public enum Severity
+    {
+        Info = 1,
+        Warning = 2,
+        Error = 3,
+        Exception = 4
+    }
+
     public class Log
     {
-        public enum Severity
-        {
-            Info = 1,
-            Warning = 2,
-            Error = 3,
-            Exception =4
-        }
-
+        public Log() { }
         public Log(string methodName, string data, Severity level)
         {
             this.MethodName = methodName;
