@@ -1,4 +1,4 @@
-name: WS Test Coverage
+name: Windows Service Tests
 
 on:
   push:
