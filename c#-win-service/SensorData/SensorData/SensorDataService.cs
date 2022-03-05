@@ -10,8 +10,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
 using System.Reflection;
-using Handlers;
-using Models;
 using Constants;
 
 namespace SensorData
@@ -36,19 +34,16 @@ namespace SensorData
         /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
-            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, "App started", Severity.Info));
             StartTimer();
         }
 
         protected override void OnContinue()
         {
-            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, "App continued", Severity.Info));
             StartTimer();
             base.OnContinue();
         }
         protected override void OnStop()
         {
-            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name,"App stopped", Severity.Info));
             StopTimer();
             base.Dispose();
             base.OnStop();
@@ -56,7 +51,6 @@ namespace SensorData
 
         protected override void OnPause()
         {
-            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, "App paused", Severity.Info));
             StopTimer();
             base.OnPause();
         }
@@ -92,7 +86,6 @@ namespace SensorData
         private void QueryData(object sender, ElapsedEventArgs e)
         {
             queryTimer.Stop();
-            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, "New query loop.", Severity.Info));
             Service.StartDataCollection();
             queryTimer.Start();
         }
