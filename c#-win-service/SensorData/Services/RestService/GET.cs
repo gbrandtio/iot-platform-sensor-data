@@ -1,5 +1,5 @@
 using Models;
-using Services.FileClient;
+using Services.FileService;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,7 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace RestClient
+namespace RestService
 {
     /// <summary>
     /// This class is responsible for retrieving sensor data from the configured API.
