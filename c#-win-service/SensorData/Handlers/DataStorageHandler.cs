@@ -15,14 +15,18 @@ using System.Xml.Linq;
 
 namespace Handlers
 {
-    public class DataStorageHandler
+    public class DataStorageHandler : IDataHandler
     {
+        #region Constructor
+        public DataStorageHandler() { }
+        #endregion
+
         #region Data Handling Methods
         /// <summary>
         /// Dynamically invokes the appropriate method based on the configured storage method.
         /// </summary>
         /// <param name="measurements">The measurements to be saved.</param>
-        public void StoreData(Dictionary<Type, List<IMeasurement>> measurements)
+        public void HandleData(Dictionary<Type, List<IMeasurement>> measurements)
         {
             StorageMethod activeStorageMethod = GetActiveStorageMethod();
             List<StorageMethod> configuredMethods = GetConfiguredStorageMethods();
@@ -38,7 +42,7 @@ namespace Handlers
         /// Reads the active storage method from the app configuration.
         /// </summary>
         /// <returns>The current active storage method.</returns>
-        public StorageMethod GetActiveStorageMethod()
+        private StorageMethod GetActiveStorageMethod()
         {
             return StorageMethod.Convert(ConfigurationManager.AppSettings[Strings.Config.DataStorageMode.Value]);
         }
@@ -47,7 +51,7 @@ namespace Handlers
         /// Transforms a list of strings to a list of StorageMethod objects.
         /// </summary>
         /// <returns>A list of the configured storage methods.</returns>
-        public List<StorageMethod> GetConfiguredStorageMethods()
+        private List<StorageMethod> GetConfiguredStorageMethods()
         {
             List<StorageMethod> configuredStorageMethods = new List<StorageMethod>();
             List<string> strStorageMethods = ExtractConfiguredStoragemethods();
@@ -86,7 +90,7 @@ namespace Handlers
         }
         #endregion
 
-        #region Private Methods
+        #region Validation Methods
         private bool ValidateStorageMethod(StorageMethod activeMethod, List<StorageMethod> configuredMethods)
         {
             foreach (StorageMethod storageMethod in configuredMethods)

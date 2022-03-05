@@ -20,7 +20,7 @@ namespace HandlerTests
         [TestMethod]
         public void TestLogger()
         {
-            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, "test", Severity.Info));
+            LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, "test", Severity.Info));
 
             //Check that entry has been logged. The file format of the logs is log-yyyyMMdd.csv.
             string currentLogFile = "log-" + DateTime.Now.ToString("yyyyMMdd") + FileExtensions.Csv.InternalValue;

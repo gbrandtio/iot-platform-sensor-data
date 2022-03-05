@@ -11,7 +11,7 @@ namespace Handlers
     /// <summary>
     /// Responsible for maintaining the application logs.
     /// </summary>
-    public class Logger
+    public class LogHandler
     {
         private static string currentLogFile = String.Empty;
         public static void Log(Log data)

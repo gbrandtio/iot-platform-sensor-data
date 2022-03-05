@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Handlers
 {
-    public class SensorDataHandler
+    public class SensorDataHandler : IDataHandler
     {
         #region Properties
         public List<IMeasurement> HumidityData { get; set; }
@@ -22,11 +22,20 @@ namespace Handlers
         public List<IMeasurement> Temperaturedata { get; set; }
         #endregion
 
+        #region IDataHandler
+        public Dictionary<Type, List<IMeasurement>> HandleData(Dictionary<Type, List<IMeasurement>> unused)
+        {
+            string sensorDataResponse = RetrieveSensorDataValues();
+            List<IMeasurement> allMeasurements = ExtractSensorDataValues(sensorDataResponse);
+            return GetSeparatedMeasurementLists(allMeasurements);
+        }
+        #endregion
+
         #region Data Extractor Methods
         public string RetrieveSensorDataValues()
         {
             var x = Severity.Error;
-            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value, Severity.Info));
+            LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value, Severity.Info));
             return GET.DoRequest(Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value);
         }
 

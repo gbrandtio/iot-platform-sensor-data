@@ -1,24 +1,47 @@
 ﻿using Constants;
 using Interfaces;
+using Models;
 using Newtonsoft.Json.Linq;
 using RestClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Handlers
 {
-    public class GeocodeDataHandler
+    public class GeocodeDataHandler : IDataHandler
     {
+        #region Constructor
+        public GeocodeDataHandler() { }
+        #endregion
+
+        #region Data Handling Methods
+        public Dictionary<Type, List<IMeasurement>> HandleData(Dictionary<Type, List<IMeasurement>> allMeasurements)
+        {
+            foreach (KeyValuePair<Type, List<IMeasurement>> entry in allMeasurements)
+            {
+                Type measurementType = entry.Key;
+                List<IMeasurement> measurements = entry.Value;
+                foreach(IMeasurement measurement in measurements)
+                {
+                    if (measurement != null)
+                        measurement.Location.City = FindLocationInfo(measurement.Location.Longitude, measurement.Location.Latitude);
+                }
+            }
+            return allMeasurements;
+        }
+        #endregion
+
         #region Parsing Methods
         /// <summary>
         /// Parses the Geocode API JSON response and extracts the specified info from the formatted_address field.
         /// </summary>
         /// <param name="json">The Geocode JSON API response</param>
         /// <returns>The requested info from the formatted address</returns>
-        public string ExtractData(string json, int pos, char delimeter) 
+        private string ExtractData(string json, int pos, char delimeter) 
         {
             string formattedAddress = ExtractFormattedAddress(json);
             string requestedAddressComponent = Strings.String.Unknown.Value;
@@ -29,7 +52,7 @@ namespace Handlers
             }
             catch (Exception e)
             {
-
+                LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, e.ToString(), Severity.Exception));
             }
             return requestedAddressComponent;
         }
@@ -50,25 +73,14 @@ namespace Handlers
             }
             catch (Exception e)
             {
-
+                LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, e.ToString(), Severity.Exception));
             }
             return formattedAddress;
         }
         #endregion
-        public void AddLocationInfo(List<IMeasurement> allMeasurements)
-        {
-            foreach (IMeasurement measurement in allMeasurements)
-            {
-                if (measurement != null)
-                    measurement.Location.City = FindLocationInfo(measurement.Location.Longitude, measurement.Location.Latitude);
-            }
-        }
-        #region Data Handling Methods
-
-        #endregion
 
         #region Reverse Geocoding
-        public string FindLocationInfo(double longitude, double latitude)
+        private string FindLocationInfo(double longitude, double latitude)
         {
             string localeInfo = Strings.String.Unknown.Value;
             try
@@ -81,7 +93,7 @@ namespace Handlers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
+                LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, e.ToString(), Severity.Exception));
             }
             return localeInfo;
         }
