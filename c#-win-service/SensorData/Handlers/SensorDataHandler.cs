@@ -1,6 +1,6 @@
-﻿using Interfaces;
+﻿using Constants;
+using Interfaces;
 using Models;
-using Models.Config_Models;
 using Newtonsoft.Json.Linq;
 using RestClient;
 using System;
@@ -25,8 +25,8 @@ namespace Handlers
         #region Data Extractor Methods
         public string RetrieveSensorDataValues()
         {
-            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value,
-                Severity.Info));
+            var x = Severity.Error;
+            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value, Severity.Info));
             return GET.DoRequest(Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value);
         }
 

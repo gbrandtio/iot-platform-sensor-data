@@ -66,12 +66,16 @@
       <Project>{94511d84-c198-4368-b6be-c59fa058da84}</Project>
       <Name>RestClient</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Constants\Constants.csproj">
+      <Project>{D889581F-32DE-47CE-9638-825E75C8FDAD}</Project>
+      <Name>Constants</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{3CE1AE07-28A5-4A37-814B-274C799B01CE}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
-      <Project>{e3dc6f5e-ae15-4f71-8698-f7d6289c1eb8}</Project>
+      <Project>{E3DC6F5E-AE15-4F71-8698-F7D6289C1EB8}</Project>
       <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
