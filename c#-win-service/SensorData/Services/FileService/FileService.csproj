@@ -7,8 +7,8 @@
     <ProjectGuid>{E0AC0F2C-B749-4143-812A-4C778DE1DBE7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>FileClient</RootNamespace>
-    <AssemblyName>FileClient</AssemblyName>
+    <RootNamespace>FileService</RootNamespace>
+    <AssemblyName>FileService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>

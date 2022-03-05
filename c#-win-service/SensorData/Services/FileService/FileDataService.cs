@@ -10,7 +10,7 @@ using CsvHelper;
 using System.Globalization;
 using Constants;
 
-namespace Services.FileClient
+namespace Services.FileService
 {
     /// <summary>
     /// Responsible for storing the sensor data / measurements to file formats.

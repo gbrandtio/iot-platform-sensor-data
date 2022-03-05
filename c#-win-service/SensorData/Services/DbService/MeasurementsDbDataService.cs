@@ -1,6 +1,5 @@
 ﻿using Interfaces;
 using Models;
-using Services.FileClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.DbClient
+namespace Services.DbService
 {
     public class MeasurementsDbDataService
     {

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Services.DbClient
+namespace Services.DbService
 {
     public class MeasurementsDbInitializer : DropCreateDatabaseAlways<MeasurementsDbContext>
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{E226C332-C404-4D22-B19B-0279E5A37480}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DbClient</RootNamespace>
-    <AssemblyName>DbClient</AssemblyName>
+    <RootNamespace>DbService</RootNamespace>
+    <AssemblyName>DbService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -64,7 +64,7 @@
       <Project>{E3DC6F5E-AE15-4F71-8698-F7D6289C1EB8}</Project>
       <Name>Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FileClient\FileService.csproj">
+    <ProjectReference Include="..\FileService\FileService.csproj">
       <Project>{E0AC0F2C-B749-4143-812A-4C778DE1DBE7}</Project>
       <Name>FileService</Name>
     </ProjectReference>

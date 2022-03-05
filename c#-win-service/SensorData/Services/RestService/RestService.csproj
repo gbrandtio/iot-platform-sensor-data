@@ -8,8 +8,8 @@
     <ProjectGuid>{94511D84-C198-4368-B6BE-C59FA058DA84}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>RestClient</RootNamespace>
-    <AssemblyName>RestClient</AssemblyName>
+    <RootNamespace>RestService</RootNamespace>
+    <AssemblyName>RestService</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -60,7 +60,7 @@
       <Project>{E3DC6F5E-AE15-4F71-8698-F7D6289C1EB8}</Project>
       <Name>Models</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FileClient\FileService.csproj">
+    <ProjectReference Include="..\FileService\FileService.csproj">
       <Project>{e0ac0f2c-b749-4143-812a-4c778de1dbe7}</Project>
       <Name>FileService</Name>
     </ProjectReference>
