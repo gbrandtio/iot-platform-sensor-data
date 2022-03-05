@@ -77,9 +77,9 @@
       <Project>{D889581F-32DE-47CE-9638-825E75C8FDAD}</Project>
       <Name>Constants</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Factories\Factories.csproj">
+    <ProjectReference Include="..\Factories\DataHandlerFactories.csproj">
       <Project>{7A0C9A2F-3167-43A8-83C7-F77B738C3E8A}</Project>
-      <Name>Factories</Name>
+      <Name>DataHandlerFactories</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{3CE1AE07-28A5-4A37-814B-274C799B01CE}</Project>

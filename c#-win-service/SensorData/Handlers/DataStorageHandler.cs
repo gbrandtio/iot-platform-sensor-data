@@ -26,7 +26,7 @@ namespace Handlers
         /// Dynamically invokes the appropriate method based on the configured storage method.
         /// </summary>
         /// <param name="measurements">The measurements to be saved.</param>
-        public void HandleData(Dictionary<Type, List<IMeasurement>> measurements)
+        public Dictionary<Type, List<IMeasurement>> HandleData(Dictionary<Type, List<IMeasurement>> measurements)
         {
             StorageMethod activeStorageMethod = GetActiveStorageMethod();
             List<StorageMethod> configuredMethods = GetConfiguredStorageMethods();
@@ -36,6 +36,7 @@ namespace Handlers
                     , BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(Dictionary<Type, List<IMeasurement>>) }, null);
                 methodInfo.Invoke(this, new object[] { measurements });
             }
+            return null;
         }
 
         /// <summary>
