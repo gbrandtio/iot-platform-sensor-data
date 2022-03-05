@@ -1,3 +1,5 @@
+![.NET](https://github.com/gbrandtio/iot-platform-sensor-data/actions/workflows/dotnet.yml/badge.svg)
+
 # iot-platform-sensor-data
 This repository includes applications that communicate with sensor open data APIs in order to request, receive, display and analyze environmental data from various sensors and locations.<br><br>
 In order to collect the data from the sensors the following are used:<br>
