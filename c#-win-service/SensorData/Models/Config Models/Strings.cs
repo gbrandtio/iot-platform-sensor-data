@@ -77,7 +77,7 @@ namespace Models.Config_Models
             public string Value { get; private set; }
             public long ValueLong { get; private set; }
             public static Config GeoApiKey { get { return new Config(ConfigurationManager.AppSettings[R_GEO_API_KEY]); } }
-            public static Config CountryCode { get { return new Config(R_COUNTRY_CODE); } }
+            public static Config CountryCode { get { return new Config(ConfigurationManager.AppSettings[R_COUNTRY_CODE]); } }
             public static Config TimerInterval { get { return new Config(R_TIMER_INTERVAL); } }
             public static Config DataStorageMode { get { return new Config(R_DATA_STORAGE_MODE); } }
             public static Config DataStorageMethod { get { return new Config(R_DATA_STORAGE_METHOD); } }
