@@ -124,6 +124,15 @@ namespace Handlers
             }
             return specificMeasurementObjectList;
         }
+
+        /// <summary>
+        /// Instantiates an object that matches a constructor that takes as arguments (double ,ILocation).
+        /// The method searches for classes that match these costructors only inside Models.
+        /// </summary>
+        /// <param name="type">The type of the objct to create.</param>
+        /// <param name="measurementValue">The measurement value.</param>
+        /// <param name="location">The location object</param>
+        /// <returns>An instance of the object or null.</returns>
         private dynamic Instantiate(string type, double measurementValue, ILocation location)
         {
             List<Type> types = GetIMeasurementTypes();
@@ -137,6 +146,10 @@ namespace Handlers
             return null;
         }
 
+        /// <summary>
+        /// Finds all the types of Models.
+        /// </summary>
+        /// <returns>All the Model types.</returns>
         private static List<Type> GetIMeasurementTypes()
         {
             return Assembly.UnsafeLoadFrom("Models.dll").GetTypes().ToList();
