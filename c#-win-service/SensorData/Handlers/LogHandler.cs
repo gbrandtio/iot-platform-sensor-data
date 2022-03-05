@@ -17,8 +17,7 @@ namespace Handlers
         private static string currentLogFile = String.Empty;
         public static void Log(Log data)
         {
-            if (FileDataService.CheckFileCutoff() || String.IsNullOrEmpty(currentLogFile)) currentLogFile = FileDataService.CreateFile(Strings.Config.LogPath.Value);
-            FileDataService.Write(data, currentLogFile);
+            FileDataService.Write(data);
         }
     }
 }
