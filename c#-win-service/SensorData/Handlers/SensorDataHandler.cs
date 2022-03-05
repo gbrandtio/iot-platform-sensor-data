@@ -25,8 +25,11 @@ namespace Handlers
         #region Data Extractor Methods
         public string RetrieveSensorDataValues()
         {
-            return GET.DoRequest(Strings.Sensor.SensorApi + Strings.Config.CountryCode.Value);
+            Logger.Log(new Log(MethodBase.GetCurrentMethod().Name, Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value,
+                Severity.Info));
+            return GET.DoRequest(Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value);
         }
+
         /// <summary>
         /// Iterates through the json response of the sensor API and tries to extract the required measurements
         /// and the location of each sensor.
