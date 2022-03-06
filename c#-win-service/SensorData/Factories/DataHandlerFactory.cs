@@ -25,7 +25,7 @@ namespace DataHandlerFactories
         /// <returns>An instance of the object or null.</returns>
         private dynamic Instantiate(Type type)
         {
-            List<Type> types = GetIMeasurementTypes();
+            List<Type> types = GetHandlerTypes();
             foreach (Type assemblyType in types)
             {
                 if (assemblyType.Name.ToLower().Equals(type.Name.ToLower()))
@@ -40,7 +40,7 @@ namespace DataHandlerFactories
         /// Finds all the types of Handlers.
         /// </summary>
         /// <returns>All the Model types.</returns>
-        private static List<Type> GetIMeasurementTypes()
+        private static List<Type> GetHandlerTypes()
         {
             return Assembly.UnsafeLoadFrom("Handlers.dll").GetTypes().ToList();
         }
