@@ -14,10 +14,12 @@ namespace SensorDataFactory
     {
         public ServiceController GetInstance()
         {
-            IDataHandler sensorDataHandler = new DataHandlerFactory().GetDataHandler(typeof(SensorDataHandler));
-            IDataHandler geocodeDataHandler = new DataHandlerFactory().GetDataHandler(typeof(GeocodeDataHandler));
-            IDataHandler dataStorageHandler = new DataHandlerFactory().GetDataHandler(typeof(DataStorageHandler));
-            return new ServiceController(sensorDataHandler, geocodeDataHandler, dataStorageHandler);
+            return new ServiceController(GetDataHandlerObject(typeof(SensorDataHandler)), GetDataHandlerObject(typeof(GeocodeDataHandler)), GetDataHandlerObject(typeof(DataStorageHandler)));
+        }
+
+        private IDataHandler GetDataHandlerObject(Type type)
+        {
+            return new DataHandlerFactory().GetDataHandler(type);
         }
     }
 }
