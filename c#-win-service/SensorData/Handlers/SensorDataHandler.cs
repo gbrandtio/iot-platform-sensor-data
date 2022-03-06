@@ -35,7 +35,6 @@ namespace Handlers
         #region Data Extractor Methods
         public string RetrieveSensorDataValues()
         {
-            var x = Severity.Error;
             LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value, Severity.Info));
             return GET.DoRequest(Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value);
         }
