@@ -1,4 +1,5 @@
 ﻿using Interfaces;
+using ObjService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,37 +13,7 @@ namespace DataHandlerFactories
     {
         public IDataHandler GetDataHandler(Type type)
         {
-            return Instantiate(type);
-        }
-
-        /// <summary>
-        /// Instantiates an object that matches an empty constructor.
-        /// The method searches for classes that match these costructors only inside Handlers.
-        /// </summary>
-        /// <param name="type">The type of the objct to create.</param>
-        /// <param name="measurementValue">The measurement value.</param>
-        /// <param name="location">The location object</param>
-        /// <returns>An instance of the object or null.</returns>
-        private dynamic Instantiate(Type type)
-        {
-            List<Type> types = GetHandlerTypes();
-            foreach (Type assemblyType in types)
-            {
-                if (assemblyType.Name.ToLower().Equals(type.Name.ToLower()))
-                {
-                    return Activator.CreateInstance(assemblyType);
-                }
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Finds all the types of Handlers.
-        /// </summary>
-        /// <returns>All the Model types.</returns>
-        private static List<Type> GetHandlerTypes()
-        {
-            return Assembly.UnsafeLoadFrom("Handlers.dll").GetTypes().ToList();
+            return Instantiator.GetObject(type, "Handlers.dll");
         }
     }
 }
