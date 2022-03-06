@@ -19,36 +19,11 @@ namespace Services.FileService
     {
         private string currentFilePath = String.Empty;
         private static bool isAppendMode = false;
+        private static bool isLogAppendMode = false;
         public void Store(Dictionary<Type, List<IMeasurement>> measurements)
         {
-            if (FileLimitExceeded(currentFilePath) || String.IsNullOrEmpty(currentFilePath)) currentFilePath = CreateFile(Strings.Config.DataFilePath.Value);
+            currentFilePath = CreateFile(Strings.Config.DataFilePath.Value);
             Write(measurements, currentFilePath);
-        }
-
-        /// <summary>
-        /// Checks if the file size of a file has exceeded the configured max file size.
-        /// </summary>
-        /// <param name="path">The file to check.</param>
-        /// <returns>True if the file size has been exceeded.</returns>
-        public static bool FileLimitExceeded(string path)
-        {
-            try
-            {
-                if (!File.Exists(path)) return false;
-
-                FileInfo fileInfo = new FileInfo(path);
-                long bytes = fileInfo.Length;
-                long kiloBytes = bytes / 1024;
-                if (kiloBytes > Strings.Config.MaxFileSize.ValueLong)
-                {
-                    return true;
-                }
-                return false;
-            }
-            catch (Exception e)
-            {
-            }
-            return false;
         }
 
         /// <summary>
@@ -61,9 +36,11 @@ namespace Services.FileService
             try
             {
                 logPath = logPath + "log" + "-" + DateTime.Now.Date.ToString("yyyyMMdd") + FileExtensions.Csv.InternalValue;
+                isLogAppendMode = true;
                 isAppendMode = true;
                 if (!File.Exists(logPath))
                 {
+                    isLogAppendMode = false;
                     isAppendMode = false;
                     File.Create(logPath).Close();
                 }
@@ -86,11 +63,14 @@ namespace Services.FileService
             bool isDataLogged = false;
             try
             {
-                using (var writer = new StreamWriter(path))
+                using (var writer = new StreamWriter(path, isAppendMode))
                 using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
-                    csv.WriteHeader<Log>();
-                    csv.NextRecord();
+                    if (!isAppendMode)
+                    {
+                        csv.WriteHeader<Log>();
+                        csv.NextRecord();
+                    }
                     csv.WriteRecord(data);
                     csv.NextRecord();
                 }
@@ -103,7 +83,7 @@ namespace Services.FileService
         }
 
         /// <summary>
-        /// 
+        /// Stores the measurement data into the specified file.
         /// </summary>
         /// <param name="measurements"></param>
         /// <param name="path"></param>
@@ -118,6 +98,11 @@ namespace Services.FileService
                     using (var writer = new StreamWriter(path))
                     using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                     {
+                        if (!isAppendMode)
+                        {
+                            csv.WriteHeader<IMeasurement>();
+                            csv.NextRecord();
+                        }
                         csv.WriteRecords(measurement.Value);
                         csv.NextRecord();
                     }
