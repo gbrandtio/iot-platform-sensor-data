@@ -74,6 +74,10 @@
       <Project>{e0ac0f2c-b749-4143-812a-4c778de1dbe7}</Project>
       <Name>FileService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Services\ObjService\ObjService.csproj">
+      <Project>{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}</Project>
+      <Name>ObjService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Services\RestService\RestService.csproj">
       <Project>{94511d84-c198-4368-b6be-c59fa058da84}</Project>
       <Name>RestService</Name>

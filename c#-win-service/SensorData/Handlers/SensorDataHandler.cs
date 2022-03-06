@@ -2,6 +2,7 @@
 using Interfaces;
 using Models;
 using Newtonsoft.Json.Linq;
+using ObjService;
 using RestClient;
 using RestService;
 using System;
@@ -84,7 +85,7 @@ namespace Handlers
 
                     // Dynamically instantiate concrete object of IMeasurement.
                     location = new Location(longitude, latitude, country);
-                    measurement = Instantiate(measurementName, measurementValue, location);
+                    measurement = Instantiator.GetObject(measurementName,"Models.dll", measurementValue, location);
 
                     measurements.Add(measurement);
                 }
@@ -106,7 +107,7 @@ namespace Handlers
         public Dictionary<Type, List<IMeasurement>> GetSeparatedMeasurementLists(List<IMeasurement> allMeasurements)
         {
             // Construct each list
-            List<Type> types = GetIMeasurementTypes();
+            List<Type> types = Instantiator.GetTypes("Models.dll");
             Dictionary<Type, List<IMeasurement>> dicSeparatedLists = new Dictionary<Type, List<IMeasurement>>();
             foreach (Type type in types)
             {
@@ -132,36 +133,6 @@ namespace Handlers
                     if (type == measurement.GetType()) specificMeasurementObjectList.Add(measurement);
             }
             return specificMeasurementObjectList;
-        }
-
-        /// <summary>
-        /// Instantiates an object that matches a constructor that takes as arguments (double ,ILocation).
-        /// The method searches for classes that match these costructors only inside Models.
-        /// </summary>
-        /// <param name="type">The type of the objct to create.</param>
-        /// <param name="measurementValue">The measurement value.</param>
-        /// <param name="location">The location object</param>
-        /// <returns>An instance of the object or null.</returns>
-        private dynamic Instantiate(string type, double measurementValue, ILocation location)
-        {
-            List<Type> types = GetIMeasurementTypes();
-            foreach (Type assemblyType in types)
-            {
-                if (assemblyType.Name.ToLower().Equals(type.ToLower()))
-                {
-                    return Activator.CreateInstance(assemblyType, measurementValue, location);
-                }
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Finds all the types of Models.
-        /// </summary>
-        /// <returns>All the Model types.</returns>
-        private static List<Type> GetIMeasurementTypes()
-        {
-            return Assembly.UnsafeLoadFrom("Models.dll").GetTypes().ToList();
         }
         #endregion
     }
