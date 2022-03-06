@@ -37,6 +37,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controllers", "Controllers"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorDataController", "Controllers\SensorDataController\SensorDataController.csproj", "{A656EB29-FE52-436B-B759-985CF7905E97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjService", "Services\ObjService\ObjService.csproj", "{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{A656EB29-FE52-436B-B759-985CF7905E97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A656EB29-FE52-436B-B759-985CF7905E97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A656EB29-FE52-436B-B759-985CF7905E97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{7A0C9A2F-3167-43A8-83C7-F77B738C3E8A} = {B9CADCE6-4864-400D-9248-1CF1AFB98DE5}
 		{4D18F6E1-3E53-4C59-ACBC-33FC308BB9BF} = {B9CADCE6-4864-400D-9248-1CF1AFB98DE5}
 		{A656EB29-FE52-436B-B759-985CF7905E97} = {6EF8DD0E-91EA-4FAE-AD78-2696E4318B10}
+		{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0} = {C3CEF840-1653-4E93-BA5B-7AA45B6585E3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A9D2265-C774-4811-8ECA-CABB3576F076}
