@@ -41,10 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataStorageHandlerFactory.cs" />
-    <Compile Include="GeocodeDataHandlerFactory.cs" />
+    <Compile Include="DataHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SensorDataHandlerFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Handlers\Handlers.csproj">

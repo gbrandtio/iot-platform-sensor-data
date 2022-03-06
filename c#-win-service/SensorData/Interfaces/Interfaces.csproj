@@ -54,7 +54,6 @@
     <Compile Include="IDataHandler.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="IDataHandlerFactory.cs" />
     <Compile Include="ILocation.cs" />
     <Compile Include="IMeasurement.cs" />
     <Compile Include="IParser.cs" />

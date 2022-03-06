@@ -81,6 +81,10 @@
       <Project>{7A0C9A2F-3167-43A8-83C7-F77B738C3E8A}</Project>
       <Name>DataHandlerFactories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Handlers\Handlers.csproj">
+      <Project>{18E20006-07A4-4771-82B9-3738FFB21DFD}</Project>
+      <Name>Handlers</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{3CE1AE07-28A5-4A37-814B-274C799B01CE}</Project>
       <Name>Interfaces</Name>

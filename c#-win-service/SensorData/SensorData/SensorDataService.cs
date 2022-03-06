@@ -12,7 +12,8 @@ using System.Timers;
 using System.Reflection;
 using Constants;
 using Interfaces;
-using Factories;
+using DataHandlerFactories;
+using Handlers;
 
 namespace SensorData
 {
@@ -88,9 +89,9 @@ namespace SensorData
         private void QueryData(object sender, ElapsedEventArgs e)
         {
             queryTimer.Stop();
-            IDataHandler sensorDataHandler = new SensorDataHandlerFactory().GetDataHandler();
-            IDataHandler geocodeDataHandler = new GeocodeDataHandlerFactory().GetDataHandler();
-            IDataHandler dataStorageHandler = new DataStorageHandlerFactory().GetDataHandler();
+            IDataHandler sensorDataHandler = new DataHandlerFactory().GetDataHandler(typeof(SensorDataHandler));
+            IDataHandler geocodeDataHandler = new DataHandlerFactory().GetDataHandler(typeof(GeocodeDataHandler));
+            IDataHandler dataStorageHandler = new DataHandlerFactory().GetDataHandler(typeof(DataStorageHandler));
             Service.StartDataCollection(sensorDataHandler, geocodeDataHandler, dataStorageHandler);
             queryTimer.Start();
         }
