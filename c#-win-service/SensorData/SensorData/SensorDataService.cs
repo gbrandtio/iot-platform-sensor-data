@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Timers;
 using System.Reflection;
 using Constants;
+using Interfaces;
 
 namespace SensorData
 {
@@ -18,11 +19,14 @@ namespace SensorData
     {
         #region members
         private Timer queryTimer; // Timer that triggers the query of the data every time it elapses (config TimerInterval).
+        private int queryTimerInterval;
         #endregion
 
         #region Constructor
         public SensorDataService()
         {
+            queryTimer = new Timer();
+            queryTimerInterval = int.Parse(ConfigurationManager.AppSettings[Strings.Config.TimerInterval.Value]);
             InitializeComponent();
         }
         #endregion
@@ -63,9 +67,8 @@ namespace SensorData
         /// </summary>
         private void StartTimer()
         {
-            queryTimer = new Timer();
             queryTimer.Elapsed += QueryData;
-            queryTimer.Interval = int.Parse(ConfigurationManager.AppSettings[Strings.Config.TimerInterval.Value]);
+            queryTimer.Interval = queryTimerInterval;
             queryTimer.Enabled = true;
         }
 
@@ -86,8 +89,8 @@ namespace SensorData
         private void QueryData(object sender, ElapsedEventArgs e)
         {
             queryTimer.Stop();
-            SensorDataController.ServiceController sensorDataServiceController = new SensorDataFactory.SensorDataFactory().GetInstance();
-            sensorDataServiceController.StartDataCollection();
+            IController sensorDataServiceController = new SensorDataFactory.SensorDataControllerFactory().GetInstance();
+            sensorDataServiceController.Control();
             queryTimer.Start();
         }
         #endregion

@@ -84,6 +84,10 @@
       <Project>{4d18f6e1-3e53-4c59-acbc-33fc308bb9bf}</Project>
       <Name>SensorDataFactories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Interfaces\Interfaces.csproj">
+      <Project>{3CE1AE07-28A5-4A37-814B-274C799B01CE}</Project>
+      <Name>Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
