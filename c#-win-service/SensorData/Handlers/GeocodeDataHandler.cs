@@ -19,7 +19,7 @@ namespace Handlers
         public GeocodeDataHandler() { }
         #endregion
 
-        #region Data Handling Methods
+        #region IDataHandler
         public Dictionary<Type, List<IMeasurement>> HandleData(Dictionary<Type, List<IMeasurement>> allMeasurements)
         {
             foreach (KeyValuePair<Type, List<IMeasurement>> entry in allMeasurements)

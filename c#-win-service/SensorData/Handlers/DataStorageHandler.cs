@@ -21,7 +21,7 @@ namespace Handlers
         public DataStorageHandler() { }
         #endregion
 
-        #region Data Handling Methods
+        #region IDataHandler
         /// <summary>
         /// Dynamically invokes the appropriate method based on the configured storage method.
         /// </summary>
@@ -38,7 +38,9 @@ namespace Handlers
             }
             return null;
         }
+        #endregion
 
+        #region Configuration Methods
         /// <summary>
         /// Reads the active storage method from the app configuration.
         /// </summary>
