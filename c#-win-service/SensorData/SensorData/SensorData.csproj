@@ -32,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\SensorData.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -75,10 +76,6 @@
     <ProjectReference Include="..\Constants\Constants.csproj">
       <Project>{D889581F-32DE-47CE-9638-825E75C8FDAD}</Project>
       <Name>Constants</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Controllers\SensorDataController\SensorDataController.csproj">
-      <Project>{A656EB29-FE52-436B-B759-985CF7905E97}</Project>
-      <Name>SensorDataController</Name>
     </ProjectReference>
     <ProjectReference Include="..\Factories\SensorDataFactories\SensorDataFactories.csproj">
       <Project>{4d18f6e1-3e53-4c59-acbc-33fc308bb9bf}</Project>
