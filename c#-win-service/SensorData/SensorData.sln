@@ -39,6 +39,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorDataController", "Con
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjService", "Services\ObjService\ObjService.csproj", "{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ParserService", "Services\ParserService\ParserService.csproj", "{EB839E4C-7B7E-406D-9576-2B01119248EF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceFactories", "Factories\ServiceFactories\ServiceFactories.csproj", "{2EC446CB-DE31-4AA0-9547-579B8E0843B7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -101,6 +105,14 @@ Global
 		{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EB839E4C-7B7E-406D-9576-2B01119248EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EB839E4C-7B7E-406D-9576-2B01119248EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EB839E4C-7B7E-406D-9576-2B01119248EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EB839E4C-7B7E-406D-9576-2B01119248EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EC446CB-DE31-4AA0-9547-579B8E0843B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC446CB-DE31-4AA0-9547-579B8E0843B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC446CB-DE31-4AA0-9547-579B8E0843B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC446CB-DE31-4AA0-9547-579B8E0843B7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +127,8 @@ Global
 		{4D18F6E1-3E53-4C59-ACBC-33FC308BB9BF} = {B9CADCE6-4864-400D-9248-1CF1AFB98DE5}
 		{A656EB29-FE52-436B-B759-985CF7905E97} = {6EF8DD0E-91EA-4FAE-AD78-2696E4318B10}
 		{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0} = {C3CEF840-1653-4E93-BA5B-7AA45B6585E3}
+		{EB839E4C-7B7E-406D-9576-2B01119248EF} = {C3CEF840-1653-4E93-BA5B-7AA45B6585E3}
+		{2EC446CB-DE31-4AA0-9547-579B8E0843B7} = {B9CADCE6-4864-400D-9248-1CF1AFB98DE5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9A9D2265-C774-4811-8ECA-CABB3576F076}
