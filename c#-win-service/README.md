@@ -1,4 +1,4 @@
-# Sensor Data Service
+# Sensor Data Service :satellite:
 This service is responsible for quering the sensor.community API periodically in order to fetch the environmental measurements from the sensors. It can be configured to handle the data storage via different methods, to collect data for different countries and can be parametrized for various configs such as log level, file formats etc.
 
 ## Contents
