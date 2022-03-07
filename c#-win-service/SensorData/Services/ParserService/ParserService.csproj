@@ -59,6 +59,10 @@
       <Project>{3CE1AE07-28A5-4A37-814B-274C799B01CE}</Project>
       <Name>Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FileService\FileService.csproj">
+      <Project>{E0AC0F2C-B749-4143-812A-4C778DE1DBE7}</Project>
+      <Name>FileService</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
