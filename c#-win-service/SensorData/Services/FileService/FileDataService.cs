@@ -9,6 +9,7 @@ using System.IO;
 using CsvHelper;
 using System.Globalization;
 using Constants;
+using System.Diagnostics;
 
 namespace Services.FileService
 {
@@ -17,9 +18,22 @@ namespace Services.FileService
     /// </summary>
     public class FileDataService
     {
-        private string currentFilePath = String.Empty;
+        #region Members
+        private string currentFilePath = string.Empty;
         private static bool isAppendMode = false;
         private static bool isLogAppendMode = false;
+        #endregion
+
+        #region Properties
+        public static string AppConfigFilePath
+        {
+            get
+            {
+                return GetAppConfigurationFilename();
+            }
+        }
+        #endregion
+
         public void Store(Dictionary<Type, List<IMeasurement>> measurements)
         {
             currentFilePath = CreateFile(Strings.Config.DataFilePath.Value);
@@ -66,7 +80,7 @@ namespace Services.FileService
                 using (var writer = new StreamWriter(path, isAppendMode))
                 using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
-                    if (!isAppendMode)
+                    if (!isLogAppendMode)
                     {
                         csv.WriteHeader<Log>();
                         csv.NextRecord();
@@ -113,6 +127,15 @@ namespace Services.FileService
             {
             }
             return isDataLogged;
+        }
+
+        private static string GetAppConfigurationFilename()
+        {
+            // Extract all confguration keys from app.config.
+            string currentProccessName = Process.GetCurrentProcess().ProcessName;
+            string appConfigFilePath = Directory.GetCurrentDirectory() + "\\" + currentProccessName + FileExtensions.ExeConfig;
+
+            return appConfigFilePath;
         }
     }
 }
