@@ -1,5 +1,6 @@
 ﻿using Constants;
 using Interfaces;
+using ServiceFactories;
 using Services.DbService;
 using Services.FileService;
 using System;
@@ -32,7 +33,7 @@ namespace Handlers
             List<StorageMethod> configuredMethods = GetConfiguredStorageMethods();
             if (ValidateStorageMethod(activeStorageMethod, configuredMethods))
             {
-                MethodInfo methodInfo = typeof(DataStorageHandler).GetMethod(StorageMethod.ENTITY.Value
+                MethodInfo methodInfo = typeof(DataStorageHandler).GetMethod(activeStorageMethod.Value
                     , BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(Dictionary<Type, List<IMeasurement>>) }, null);
                 methodInfo.Invoke(this, new object[] { measurements });
             }
@@ -56,44 +57,31 @@ namespace Handlers
         /// <returns>A list of the configured storage methods.</returns>
         private List<StorageMethod> GetConfiguredStorageMethods()
         {
-            List<StorageMethod> configuredStorageMethods = new List<StorageMethod>();
-            List<string> strStorageMethods = ExtractConfiguredStoragemethods();
-            foreach (string strStorageMethod in strStorageMethods)
-            {
-                configuredStorageMethods.Add(StorageMethod.Convert(strStorageMethod));
-            }
-            return configuredStorageMethods;
+            List<string> strStorageMethods = ExtractInfo(Strings.String.AppSettings.Value, Strings.String.Add.Value, Strings.String.Key.Value, FileDataService.AppConfigFilePath);
+            return strStorageMethods.Where(item => item != null).Select(item => StorageMethod.Convert(item)).ToList();
         }
         #endregion
 
-        #region Data Parsing Methods
+        #region Services Interaction Methods
         /// <summary>
-        /// Extracts the configured storage methods from the App.config.
+        /// Used to parse the application's configuration file in order to fetch
+        /// the configs regarding the storage methods.
         /// </summary>
-        /// <returns>A List that contains the configured storage methods</returns>
-        private List<string> ExtractConfiguredStoragemethods()
+        /// <param name="args"></param>
+        /// <returns></returns>
+        private List<string> ExtractInfo(params object[] args)
         {
-            List<string> dataStorageMethods = new List<string>();
-
-            // Extract all confguration keys from app.config.
-            string currentProccessName = Process.GetCurrentProcess().ProcessName;
-            string appConfigFilePath = Directory.GetCurrentDirectory() + "\\" + currentProccessName + FileExtensions.ExeConfig;
-            XDocument doc = XDocument.Load(appConfigFilePath);
-            var result = doc.Descendants(Strings.String.AppSettings.Value).Descendants(Strings.String.Add.Value).Attributes(Strings.String.Key.Value);
-
-            // Add all storage methods to the returning list.
-            foreach (var item in result)
-            {
-                if (item.Value.Equals(Strings.Config.DataStorageMethod))
-                {
-                    dataStorageMethods.Add(item.Value);
-                }
-            }
-            return dataStorageMethods;
+            return new ParserServiceFactory().GetInstance(FileDataService.AppConfigFilePath).ExtractData(args);
         }
         #endregion
 
         #region Validation Methods
+        /// <summary>
+        /// Validates that the storage mode has been configured in the storage methods.
+        /// </summary>
+        /// <param name="activeMethod">The current configured storage mode.</param>
+        /// <param name="configuredMethods">The configured storage methods.</param>
+        /// <returns></returns>
         private bool ValidateStorageMethod(StorageMethod activeMethod, List<StorageMethod> configuredMethods)
         {
             foreach (StorageMethod storageMethod in configuredMethods)
