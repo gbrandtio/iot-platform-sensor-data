@@ -4,6 +4,7 @@ using Models;
 using Newtonsoft.Json.Linq;
 using RestClient;
 using RestService;
+using ServiceFactories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace Handlers
 {
     public class GeocodeDataHandler : IDataHandler
     {
+        #region Members
+        private IParser parser;
+        #endregion
+
         #region Constructor
         public GeocodeDataHandler() { }
         #endregion
@@ -36,67 +41,41 @@ namespace Handlers
         }
         #endregion
 
-        #region Parsing Methods
-        /// <summary>
-        /// Parses the Geocode API JSON response and extracts the specified info from the formatted_address field.
-        /// </summary>
-        /// <param name="json">The Geocode JSON API response</param>
-        /// <returns>The requested info from the formatted address</returns>
-        private string ExtractData(string json, int pos, char delimeter) 
-        {
-            string formattedAddress = ExtractFormattedAddress(json);
-            string requestedAddressComponent = Strings.String.Unknown.Value;
-            try
-            {
-                string[] addrArray = formattedAddress.Split(delimeter);
-                requestedAddressComponent = addrArray[pos];
-            }
-            catch (Exception e)
-            {
-                LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, e.ToString(), Severity.Exception));
-            }
-            return requestedAddressComponent;
-        }
-
-        /// <summary>
-        /// Parses the JSON Geocode API response and extracts the formatted_address field value.
-        /// </summary>
-        /// <param name="response">Geocode API response</param>
-        /// <returns>The formatted_address value as a string</returns>
-        private string ExtractFormattedAddress(string response)
-        {
-            string formattedAddress = Strings.String.Unknown.Value;
-            try
-            {
-                JObject jResponse = JObject.Parse(response);
-                JArray jResultsArray = (JArray)jResponse[Strings.String.Results.Value];
-                formattedAddress = jResultsArray[0][Strings.Geocode.FormattedAddress.Value].ToString();
-            }
-            catch (Exception e)
-            {
-                LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, e.ToString(), Severity.Exception));
-            }
-            return formattedAddress;
-        }
-        #endregion
-
         #region Reverse Geocoding
         private string FindLocationInfo(double longitude, double latitude)
         {
             string localeInfo = Strings.String.Unknown.Value;
             try
             {
-                string URL = Strings.Geocode.GeocodeURL.Value + longitude + "," + latitude + Strings.Geocode.URLKeyParam + Strings.Config.GeoApiKey;
-                string response = GET.DoRequest(URL);
-
-                localeInfo = ExtractData(response, Strings.Geocode.InfoCity.ValueInt, ',');
-                if (localeInfo.Equals(Strings.String.Unknown.Value)) localeInfo = ExtractData(response, Strings.Geocode.InfoCountry.ValueInt, ',');
+                string response = RetrieveGeocodeResponse(longitude, latitude);
+                string formattedAddress = ExtractInfo(GetParser(response), response, Strings.String.Results.Value, Strings.Geocode.FormattedAddress.Value)[0];
+                localeInfo = ExtractInfo(GetParser(formattedAddress), formattedAddress, Strings.Geocode.InfoCity.ValueInt, ',')[0];
             }
             catch (Exception e)
             {
                 LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, e.ToString(), Severity.Exception));
             }
             return localeInfo;
+        }
+        #endregion
+
+        #region Services Interaction Methods
+        private string RetrieveGeocodeResponse(double longitude, double latitude)
+        {
+            string URL = Strings.Geocode.GeocodeURL.Value + longitude + "," + latitude + Strings.Geocode.URLKeyParam.Value + Strings.Config.GeoApiKey.Value;
+            return GET.DoRequest(URL);
+        }
+
+        private IParser GetParser(string data)
+        {
+            ParserServiceFactory parserServiceFactory = new ParserServiceFactory();
+            parser = parserServiceFactory.GetInstance(data);
+            return parser;
+        }
+
+        private List<string> ExtractInfo(IParser parser, params object[] args)
+        {
+            return parser.ExtractData(args);
         }
         #endregion
     }

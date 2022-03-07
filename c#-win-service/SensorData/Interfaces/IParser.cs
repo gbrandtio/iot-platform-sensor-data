@@ -8,9 +8,8 @@ namespace Interfaces
 {
     public interface IParser
     {
-        #region Methods
-        string ExtractData(string json);
-        string ExtractSpecificInfo(string formattedAddress, int pos, char delimeter);
-        #endregion
+        List<string> ExtractData(params object[] args);
+
+        bool ValidateData(string data);
     }
 }
