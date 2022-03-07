@@ -12,7 +12,7 @@ namespace SensorDataFactory
 {
     public class SensorDataControllerFactory
     {
-        public ServiceController GetInstance()
+        public IController GetInstance()
         {
             return new ServiceController(GetDataHandlerObject(typeof(SensorDataHandler)), GetDataHandlerObject(typeof(GeocodeDataHandler)), GetDataHandlerObject(typeof(DataStorageHandler)));
         }
