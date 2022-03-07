@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SensorDataController
 {
-    public class ServiceController
+    public class ServiceController : IController
     {
         #region Properties
         public IDataHandler SensorDataHandler { get; set; }
@@ -31,7 +31,7 @@ namespace SensorDataController
         /// Controls the main flow of the service.
         /// The entry point of the program. Implements the main flow of the service to request/retrieve/store the data.
         /// </summary>
-        public void StartDataCollection()
+        public void Control()
         {
             // Get separate lists for each measurement type. Will help us store different measurement types to their respective tables.
             Dictionary<Type, List<IMeasurement>> dicSeparatedMeasurements = SensorDataHandler.HandleData(new Dictionary<Type, List<IMeasurement>>());
