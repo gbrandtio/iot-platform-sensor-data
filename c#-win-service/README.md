@@ -31,13 +31,16 @@ The main flow that the application follows (high level) is explained below and i
 4. Separate the saved data into discrete lists. Each list represents a measurement type.
 5. Save the data using the configured data handling method.
 
+## Architecture
+For documentation of classes, design patterns and principles and app architecture check https://github.com/gbrandtio/iot-platform-sensor-data/wiki.
+
 ## Installation
 In order to install the service locally you need to follow the below steps:
 - Download the latest release, which you can find inside the `Deliverables` folder.
 - `sc create SensorDataService binpath='..path\to\SensorData.exe' start=auto`
 - `sc start`
 
-If you have already installed the service, but you want to install a newer release version:
+If you have already installed the service, but you want to install a newer version:
 - `sc stop SensorDataService`
 - `sc delete SensorDataService`
 - `sc create SensorDataService binpath='..path\to\new\SensorData.exe start=auto`
