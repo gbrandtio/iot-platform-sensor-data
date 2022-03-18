@@ -64,5 +64,35 @@ namespace ParserService
             return isValidJson;
         }
         #endregion
+
+        #region JSON Parsing Methods
+        /// <summary>
+        /// Loops through a JToken in order to find the specified property and 
+        /// return it's value.
+        /// </summary>
+        /// <param name="jToken">The JObject.</param>
+        /// <param name="propertyToExtract">The property to extract.</param>
+        /// <returns>The value of the specified property if found, otherwise null.</returns>
+        public string ExtractJPropertyFromJObject(JToken jToken, string propertyToExtract)
+        {
+            foreach (JProperty property in jToken)
+            {
+                if (property.Name.Equals(propertyToExtract)) return property.Value.ToString();
+            }
+            return null;
+        }
+
+        public Dictionary<string, string> ExtractJMeasurementsFromEachJObject(JArray jArray)
+        {
+            Dictionary<string, string> jPropertyValuePairs = new Dictionary<string, string>();
+            foreach (JObject jObject in jArray)
+            {
+                string measurementName = jObject.GetValue(Strings.Sensor.ValueType.Value).ToString();
+                string measurementValue = jObject.GetValue(Strings.String.ValueR.Value).ToString();
+                jPropertyValuePairs.Add(measurementName, measurementValue);
+            }
+            return null;
+        }
+        #endregion
     }
 }
