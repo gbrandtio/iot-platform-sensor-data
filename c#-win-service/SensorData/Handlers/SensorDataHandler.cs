@@ -3,6 +3,7 @@ using Interfaces;
 using Models;
 using Newtonsoft.Json.Linq;
 using ObjService;
+using ParserService;
 using RestClient;
 using RestService;
 using System;
@@ -51,50 +52,67 @@ namespace Handlers
             List<IMeasurement> measurements = new List<IMeasurement>();
             try
             {
-                IMeasurement measurement = null;
-                ILocation location;
-
-                string country = Strings.String.Unknown.Value;
-                double longitude = 0;
-                double latitude = 0;
-                string measurementName = Strings.String.Unknown.Value;
-                double measurementValue = 0;
-
                 JArray jResultsArray = JArray.Parse(json);
                 foreach (JObject obj in jResultsArray)
                 {
-                    // Extract location.
-                    JToken jLocation = (JObject)obj.GetValue(Strings.String.Location.Value);
-                    foreach (JProperty locationProperty in jLocation)
-                    {
-                        if (locationProperty.Name.Equals(Strings.String.Country.Value)) country = locationProperty.Value.ToString();
-                        if (locationProperty.Name.Equals(Strings.String.Longitude.Value)) longitude = double.Parse(locationProperty.Value.ToString());
-                        if (locationProperty.Name.Equals(Strings.String.Latitude)) latitude = double.Parse(locationProperty.Value.ToString());
-                    }
-
+                    ILocation location = ExtractLocationInfo(obj);
                     // Extract sensor data values
-                    JArray sensorDataValues = (JArray)obj.GetValue(Strings.Sensor.SensorDataValues.Value);
-                    foreach (JObject sensorValue in sensorDataValues)
+                    foreach (KeyValuePair<string, double> pair in ExtractMeasurementJSONObjects(obj))
                     {
-                        if (sensorValue.ContainsKey(Strings.Sensor.ValueType.Value))
-                        {
-                            measurementName = sensorValue.GetValue(Strings.Sensor.ValueType.Value).ToString();
-                            measurementValue = double.Parse(sensorValue.GetValue(Strings.String.ValueR.Value).ToString());
-                        }
+                        // Dynamically instantiate concrete object of IMeasurement.
+                        IMeasurement measurement = Instantiator.GetObject(pair.Key, "Models.dll", pair.Value, location);
+                        measurements.Add(measurement);
                     }
-
-                    // Dynamically instantiate concrete object of IMeasurement.
-                    location = new Location(longitude, latitude, country);
-                    measurement = Instantiator.GetObject(measurementName,"Models.dll", measurementValue, location);
-
-                    measurements.Add(measurement);
                 }
             }
             catch (Exception e)
             {
-
+                LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, e.ToString(), Severity.Exception));
             }
             return measurements;
+        }
+
+        private ILocation ExtractLocationInfo(JObject obj)
+        {
+            double longitude, latitude;
+            string country;
+            ILocation location = null;
+
+            // Extract location.
+            try
+            {
+                JSONParser jsonParser = new JSONParser();
+                JToken jLocation = (JObject)obj.GetValue(Strings.String.Location.Value);
+                country = jsonParser.ExtractJPropertyFromJObject(jLocation, Strings.String.Country.Value);
+                double.TryParse(jsonParser.ExtractJPropertyFromJObject(jLocation, Strings.String.Longitude.Value), out longitude);
+                double.TryParse(jsonParser.ExtractJPropertyFromJObject(jLocation, Strings.String.Longitude.Value), out latitude);
+                
+                location = new Location(longitude, latitude, country);
+            }
+            catch (Exception e)
+            {
+                LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, e.ToString(), Severity.Exception));
+            }
+
+            return location;
+        }
+        
+        /// <summary>
+        /// Constructs a dictionary with the measurement name and value and returns it.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private Dictionary<string, double> ExtractMeasurementJSONObjects(JObject obj)
+        {
+            JArray jArraySensorDataValues = (JArray)obj.GetValue(Strings.Sensor.SensorDataValues.Value);
+            JSONParser jsonParser = new JSONParser();
+            Dictionary<string, string> extractedPairs = jsonParser.ExtractJMeasurementsFromEachJObject(jArraySensorDataValues);
+            Dictionary<string, double> convertedPairs = new Dictionary<string, double>();
+            foreach (KeyValuePair<string, string> pair in extractedPairs)
+            {
+                convertedPairs.Add(pair.Key, double.Parse(pair.Value));
+            }
+            return convertedPairs;
         }
         #endregion
 

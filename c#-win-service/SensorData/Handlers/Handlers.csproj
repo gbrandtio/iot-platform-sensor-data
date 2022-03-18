@@ -83,6 +83,10 @@
       <Project>{DB44C8F4-9FF6-4FF0-8F60-3429D7847CB0}</Project>
       <Name>ObjService</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Services\ParserService\ParserService.csproj">
+      <Project>{EB839E4C-7B7E-406D-9576-2B01119248EF}</Project>
+      <Name>ParserService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Services\RestService\RestService.csproj">
       <Project>{94511d84-c198-4368-b6be-c59fa058da84}</Project>
       <Name>RestService</Name>
