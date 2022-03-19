@@ -10,8 +10,15 @@ using System.Threading.Tasks;
 
 namespace SensorDataFactory
 {
+    /// <summary>
+    /// Responsible for constructing the correct ServiceController instance.
+    /// </summary>
     public class SensorDataControllerFactory
     {
+        /// <summary>
+        /// Constructs a service controller instance by getting instances of the correct data handlers.
+        /// </summary>
+        /// <returns>A ServiceController instance.</returns>
         public IController GetInstance()
         {
             return new ServiceController(GetDataHandlerObject(typeof(SensorDataHandler)), GetDataHandlerObject(typeof(GeocodeDataHandler)), GetDataHandlerObject(typeof(DataStorageHandler)));
