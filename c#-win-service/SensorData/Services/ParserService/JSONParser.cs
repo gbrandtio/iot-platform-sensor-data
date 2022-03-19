@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace ParserService
 {
+    /// <summary>
+    /// Provides functionality related with JSON parsing and data extraction.
+    /// </summary>
     public class JSONParser : IParser
     {
         #region IParser
@@ -82,14 +85,23 @@ namespace ParserService
             return null;
         }
 
-        public Dictionary<string, string> ExtractJMeasurementsFromEachJObject(JArray jArray)
+        /// <summary>
+        /// Loops through a JArray and constructs a dictionary with the values of the JSON fields
+        /// specified in args.
+        /// </summary>
+        /// <param name="jArray">The JArray to loop through</param>
+        /// <param name="field1">The value from this field will be the key of the dictionary.</param>
+        /// <param name="field2">The value from this field will be the value of the dictionary.</param>
+        /// <returns>A dictionary containing the extracted values.
+        /// The dictionary can be empty.</returns>
+        public Dictionary<string, string> ExtractJMeasurementsFromEachJObject(JArray jArray, string field1, string field2)
         {
             Dictionary<string, string> jPropertyValuePairs = new Dictionary<string, string>();
             foreach (JObject jObject in jArray)
             {
-                string measurementName = jObject.GetValue(Strings.Sensor.ValueType.Value).ToString();
-                string measurementValue = jObject.GetValue(Strings.String.ValueR.Value).ToString();
-                jPropertyValuePairs.Add(measurementName, measurementValue);
+                string key = jObject.GetValue(field1).ToString();
+                string value = jObject.GetValue(field2).ToString();
+                jPropertyValuePairs.Add(key, value);
             }
             return null;
         }
