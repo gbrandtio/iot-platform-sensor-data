@@ -15,14 +15,23 @@ using Interfaces;
 
 namespace SensorData
 {
+    /// <summary>
+    /// Entry point of the application. Provides functionality to periodically
+    /// perform application related actions and specifies actions to be taken
+    /// upon receiving Service Control Manager (SCM) commands.
+    /// </summary>
     public partial class SensorDataService : ServiceBase
     {
         #region members
         private Timer queryTimer; // Timer that triggers the query of the data every time it elapses (config TimerInterval).
-        private int queryTimerInterval;
+        private int queryTimerInterval; // The interval of the timer. Should be initialized with the configured interval.
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// Initializes the timer based on the configured interval
+        /// and calls InitializeComponent function.
+        /// </summary>
         public SensorDataService()
         {
             queryTimer = new Timer();
@@ -34,18 +43,28 @@ namespace SensorData
         #region Overriden Service Methods
         /// <summary>
         /// Read service configuration and start collecting data.
+        /// Specifies actions to be taken when the service starts.
         /// </summary>
         /// <param name="args"></param>
         protected override void OnStart(string[] args)
         {
             StartTimer();
+            base.OnStart(args);
         }
 
+        /// <summary>
+        /// Specifies actions to take when a service continues normal execution
+        /// after being paused.
+        /// </summary>
         protected override void OnContinue()
         {
             StartTimer();
             base.OnContinue();
         }
+
+        /// <summary>
+        /// Specifies actions to take when the service stops.
+        /// </summary>
         protected override void OnStop()
         {
             StopTimer();
@@ -53,6 +72,9 @@ namespace SensorData
             base.OnStop();
         }
 
+        /// <summary>
+        /// Specifies actions to take when the service is paused.
+        /// </summary>
         protected override void OnPause()
         {
             StopTimer();
