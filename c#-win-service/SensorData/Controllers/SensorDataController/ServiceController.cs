@@ -7,17 +7,36 @@ using System.Threading.Tasks;
 
 namespace SensorDataController
 {
+    /// <summary>
+    /// Provides functionality that controls the main flow of the application
+    /// by calling the HandleData method of each data handler in a specific order.
+    /// </summary>
     public class ServiceController : IController
     {
         #region Properties
+        /// <summary>
+        /// Sensor Data Handler property.
+        /// </summary>
         public IDataHandler SensorDataHandler { get; set; }
 
+        /// <summary>
+        /// Geocode Data Handler property.
+        /// </summary>
         public IDataHandler GeocodeDataHandler { get; set; }
 
+        /// <summary>
+        /// Data Storage Handler property.
+        /// </summary>
         public IDataHandler DataStorageHandler { get; set; }
         #endregion
 
         #region Constructor
+        /// <summary>
+        /// Initializes the values of the internal handlers with the injected values.
+        /// </summary>
+        /// <param name="sensorDataHandler"></param>
+        /// <param name="geocodeDataHandler"></param>
+        /// <param name="dataStorageHandler"></param>
         public ServiceController(IDataHandler sensorDataHandler, IDataHandler geocodeDataHandler, IDataHandler dataStorageHandler)
         {
             SensorDataHandler = sensorDataHandler;
