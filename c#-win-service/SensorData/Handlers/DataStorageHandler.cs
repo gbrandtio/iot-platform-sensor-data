@@ -16,9 +16,16 @@ using System.Xml.Linq;
 
 namespace Handlers
 {
+    /// <summary>
+    /// Provides the functionality related to selecting the correct storage method and 
+    /// use the appropriate service in order to store the data.
+    /// </summary>
     public class DataStorageHandler : IDataHandler
     {
         #region Constructor
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public DataStorageHandler() { }
         #endregion
 

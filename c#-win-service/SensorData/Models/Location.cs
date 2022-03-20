@@ -21,7 +21,17 @@ namespace Models
     public class Location : ILocation
     {
         #region Constructor
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
         public Location() {}
+
+        /// <summary>
+        /// Constructor that instantiates a location object with the passed values.
+        /// </summary>
+        /// <param name="longitude">The longitude value</param>
+        /// <param name="latitude">Tha latitude value</param>
+        /// <param name="country">The country value (2-letter code)</param>
         public Location(double longitude, double latitude, string country)
         {
             this.Longitude = longitude;
@@ -31,12 +41,24 @@ namespace Models
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Longitude property.
+        /// </summary>
         public double Longitude { get; set; }
 
+        /// <summary>
+        /// Latitude property.
+        /// </summary>
         public double Latitude { get; set; }
 
+        /// <summary>
+        /// Country property.
+        /// </summary>
         public string Country { get; set; }
 
+        /// <summary>
+        /// City property.
+        /// </summary>
         public string City { get; set; }
         #endregion
     }

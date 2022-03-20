@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace Interfaces
 {
+    /// <summary>
+    /// Defines a contract that data handlers need to implement.
+    /// </summary>
     public interface IDataHandler
     {
+        /// <summary>
+        /// Performs operations on the passed data.
+        /// </summary>
+        /// <param name="dictionary">The data that need to be handled</param>
+        /// <returns>The transformed data.</returns>
         Dictionary<Type, List<IMeasurement>> HandleData(Dictionary<Type, List<IMeasurement>> dictionary);
     }
 }

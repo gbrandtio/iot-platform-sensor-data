@@ -14,6 +14,11 @@ namespace Handlers
     public class LogHandler
     {
         private static string currentLogFile = String.Empty;
+
+        /// <summary>
+        /// Logs the passed data into the configured file.
+        /// </summary>
+        /// <param name="data">The data to be logged.</param>
         public static void Log(Log data)
         {
             FileDataService.Write(data);

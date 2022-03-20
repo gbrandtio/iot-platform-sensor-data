@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 namespace Handlers
 {
     /// <summary>
-    /// Provides functionality to retrieve the sensor data and parse them.
+    /// Provides functionality to retrieve the sensor data, parse them and extract the useful information.
     /// </summary>
     public class SensorDataHandler : IDataHandler
     {
