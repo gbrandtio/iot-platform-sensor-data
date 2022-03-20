@@ -12,11 +12,16 @@ using System.Threading.Tasks;
 namespace RestService
 {
     /// <summary>
-    /// This class is responsible for retrieving sensor data from the configured API.
+    /// This class is responsible for performing GET requests.
     /// </summary>
     public class GET
     {
         #region Http Request Methods
+        /// <summary>
+        /// Performs a GET request.
+        /// </summary>
+        /// <param name="url">The url to request data from.</param>
+        /// <returns>The API response.</returns>
         public static string DoRequest(string url)
         {
             string response = String.Empty;

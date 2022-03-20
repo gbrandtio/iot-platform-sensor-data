@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace ObjService
 {
+    /// <summary>
+    /// Provides functionality to dynamically create objects
+    /// </summary>
     public class Instantiator
     {
         /// <summary>
@@ -44,6 +47,8 @@ namespace ObjService
         /// </summary>
         /// <param name="type">The type of the object to create.</param>
         /// <param name="assembly">The assembly to load the type from.</param>
+        /// <param name="measurementValue">The double value to instantiate the object with.</param>
+        /// <param name="location">The location to instantiate the object with.</param>
         /// <returns>An instance of the object or null.</returns>
         public static dynamic GetObject(string type, string assembly, double measurementValue, ILocation location)
         {

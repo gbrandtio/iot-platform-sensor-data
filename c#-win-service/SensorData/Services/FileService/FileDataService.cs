@@ -25,6 +25,9 @@ namespace Services.FileService
         #endregion
 
         #region Properties
+        /// <summary>
+        /// Returns the path of the SensorData.exe.config file.
+        /// </summary>
         public static string AppConfigFilePath
         {
             get
@@ -34,6 +37,10 @@ namespace Services.FileService
         }
         #endregion
 
+        /// <summary>
+        /// Stores all the data passed through the list into the appropriate file.
+        /// </summary>
+        /// <param name="measurements">A list of measurements to be stored.</param>
         public void Store(Dictionary<Type, List<IMeasurement>> measurements)
         {
             currentFilePath = CreateFile(Strings.Config.DataFilePath.Value);
@@ -43,7 +50,7 @@ namespace Services.FileService
         /// <summary>
         /// Created a new log file in the configured directory.
         /// </summary>
-        /// <param name="logMethod">The log method: could be either for app logs or for data storage.</param>
+        /// <param name="logPath">The log path to create the files.</param>
         /// <returns>The path of the new log file.</returns>
         private static string CreateFile(string logPath)
         {
@@ -69,7 +76,6 @@ namespace Services.FileService
         /// Appends all the passed data to the passed path.
         /// </summary>
         /// <param name="data">The data to write.</param>
-        /// <param name="path">The path of the log file.</param>
         /// <returns></returns>
         public static bool Write(Log data)
         {

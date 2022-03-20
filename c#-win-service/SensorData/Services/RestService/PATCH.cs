@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RestService
 {
+    /// <summary>
+    /// Responsible for performing PATCH requests.
+    /// </summary>
     public class PATCH
     {
     }

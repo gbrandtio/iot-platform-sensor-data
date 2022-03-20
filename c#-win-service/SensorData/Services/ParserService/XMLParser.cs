@@ -12,6 +12,9 @@ using System.Xml.Linq;
 
 namespace ParserService
 {
+    /// <summary>
+    /// Provides functionality related with XML parsing.
+    /// </summary>
     public class XMLParser : IParser
     {
         #region IParser

@@ -9,6 +9,10 @@ using System.Threading.Tasks;
 
 namespace Services.DbService
 {
+    /// <summary>
+    /// Provides a wrapper on top of the MeasurementsDbContext in order to insert the measurements
+    /// into the database without caring about the details of Entity.
+    /// </summary>
     public class MeasurementsDbDataService
     {
         MeasurementsDbContext dbContext = MeasurementsDbContext.GetInstance();

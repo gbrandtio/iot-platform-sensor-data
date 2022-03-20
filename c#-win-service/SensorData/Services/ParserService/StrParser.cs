@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace ParserService
 {
+    /// <summary>
+    /// Provides functionality related with String parsing.
+    /// </summary>
     public class STRParser : IParser
     {
         #region IParser
         /// <summary>
-        /// 
+        /// Splits the string and selects the specified data based on the args passed.
         /// </summary>
         /// <param name="args">
         /// args[0]: The string to be parsed.

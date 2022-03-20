@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace RestClient
 {
+    /// <summary>
+    /// Responsible for performing DELETE requests.
+    /// </summary>
     public class DELETE
     {
     }
