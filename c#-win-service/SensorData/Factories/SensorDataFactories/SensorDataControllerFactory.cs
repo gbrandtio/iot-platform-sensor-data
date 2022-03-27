@@ -24,6 +24,11 @@ namespace SensorDataFactory
             return new ServiceController(GetDataHandlerObject(typeof(SensorDataHandler)), GetDataHandlerObject(typeof(GeocodeDataHandler)), GetDataHandlerObject(typeof(DataStorageHandler)));
         }
 
+        /// <summary>
+        /// Creates a specific data handler based on the passed type.
+        /// </summary>
+        /// <param name="type">The type of the data handler to create.</param>
+        /// <returns>A concrete data handler object.</returns>
         private IDataHandler GetDataHandlerObject(Type type)
         {
             return new DataHandlerFactory().GetDataHandler(type);
