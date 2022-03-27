@@ -9,8 +9,16 @@ using System.Threading.Tasks;
 
 namespace DataHandlerFactories
 {
+    /// <summary>
+    /// Provides functionality of concrete object construction.
+    /// </summary>
     public class DataHandlerFactory
     {
+        /// <summary>
+        /// Creates a concrete data handler object based on the passed type.
+        /// </summary>
+        /// <param name="type">The data handler object type to create.</param>
+        /// <returns>A concrete data handler object.</returns>
         public IDataHandler GetDataHandler(Type type)
         {
             return Instantiator.GetObject(type, "Handlers.dll");
