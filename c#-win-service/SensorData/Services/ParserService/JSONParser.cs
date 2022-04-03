@@ -103,7 +103,7 @@ namespace ParserService
                 string value = jObject.GetValue(field2).ToString();
                 jPropertyValuePairs.Add(key, value);
             }
-            return null;
+            return jPropertyValuePairs;
         }
         #endregion
     }
