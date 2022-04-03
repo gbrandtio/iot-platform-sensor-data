@@ -12,6 +12,7 @@ using System.Timers;
 using System.Reflection;
 using Constants;
 using Interfaces;
+using Handlers;
 
 namespace SensorData
 {
@@ -34,9 +35,17 @@ namespace SensorData
         /// </summary>
         public SensorDataService()
         {
-            queryTimer = new Timer();
-            queryTimerInterval = int.Parse(ConfigurationManager.AppSettings[Strings.Config.TimerInterval.Value]);
             InitializeComponent();
+            try
+            {
+                queryTimer = new Timer();
+                queryTimerInterval = int.Parse(Strings.Config.TimerInterval.Value);
+                StartTimer();
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, e.ToString(), EventLogEntryType.Error);
+            }
         }
         #endregion
 
@@ -92,6 +101,7 @@ namespace SensorData
             queryTimer.Elapsed += QueryData;
             queryTimer.Interval = queryTimerInterval;
             queryTimer.Enabled = true;
+            queryTimer.AutoReset = false;
         }
 
         /// <summary>
@@ -110,8 +120,19 @@ namespace SensorData
         /// <param name="e">Elapsed event arguments</param>
         private void QueryData(object sender, ElapsedEventArgs e)
         {
+            #region Configuration Logging
+            EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name,
+            "Configurations: "
+            + "\nTimer Interval: " + Strings.Config.TimerInterval.Value
+            + "\nCountry code: " + Strings.Config.CountryCode.Value
+            + "\nData file path: " + Strings.Config.DataFilePath.Value
+            + "\nData storage mode: " + Strings.Config.DataStorageMode.Value
+            + "\nLogs path: " + Strings.Config.LogPath.Value
+            + "\nMaximum file size: " + Strings.Config.MaxFileSize.Value
+            , EventLogEntryType.Information);
+            #endregion
             queryTimer.Stop();
-            IController sensorDataServiceController = new SensorDataFactory.SensorDataControllerFactory().GetInstance();
+            SensorDataController.ServiceController sensorDataServiceController = new SensorDataController.ServiceController(new SensorDataHandler(), new GeocodeDataHandler(), new DataStorageHandler());
             sensorDataServiceController.Control();
             queryTimer.Start();
         }

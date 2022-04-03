@@ -34,16 +34,19 @@ namespace Handlers
         /// Dynamically invokes the appropriate method based on the configured storage method.
         /// </summary>
         /// <param name="measurements">The measurements to be saved.</param>
-        public Dictionary<Type, List<IMeasurement>> HandleData(Dictionary<Type, List<IMeasurement>> measurements)
+        public Dictionary<string, List<IMeasurement>> HandleData(Dictionary<string, List<IMeasurement>> measurements)
         {
-            StorageMethod activeStorageMethod = GetActiveStorageMethod();
-            List<StorageMethod> configuredMethods = GetConfiguredStorageMethods();
-            if (ValidateStorageMethod(activeStorageMethod, configuredMethods))
+            try
             {
                 MethodInfo methodInfo = typeof(DataStorageHandler).GetMethod(activeStorageMethod.Value
                     , BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(Dictionary<Type, List<IMeasurement>>) }, null);
                 methodInfo.Invoke(this, new object[] { measurements });
             }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, e.ToString(), EventLogEntryType.Error);
+            }
+
             return null;
         }
         #endregion
@@ -55,7 +58,7 @@ namespace Handlers
         /// <returns>The current active storage method.</returns>
         private StorageMethod GetActiveStorageMethod()
         {
-            return StorageMethod.Convert(ConfigurationManager.AppSettings[Strings.Config.DataStorageMode.Value]);
+            return StorageMethod.Convert(Strings.Config.DataStorageMode.Value);
         }
 
         /// <summary>
@@ -105,7 +108,7 @@ namespace Handlers
         /// handler in order to store the passed data.
         /// </summary>
         /// <param name="measurements"></param>
-        private void ENTITY(Dictionary<Type, List<IMeasurement>> measurements)
+        private void ENTITY(Dictionary<string, List<IMeasurement>> measurements)
         {
             MeasurementsDbDataService dbDataHandler = new MeasurementsDbDataService();
             dbDataHandler.Insert(measurements);
@@ -116,7 +119,7 @@ namespace Handlers
         /// the configured API.
         /// </summary>
         /// <param name="measurements"></param>
-        private void API(Dictionary<Type, List<IMeasurement>> measurements)
+        private void API(Dictionary<string, List<IMeasurement>> measurements)
         {
             throw new NotImplementedException();
         }
@@ -126,7 +129,7 @@ namespace Handlers
         /// configured file, with the specified format.
         /// </summary>
         /// <param name="measurements"></param>
-        private void FILE(Dictionary<Type, List<IMeasurement>> measurements)
+        private void FILE(Dictionary<string, List<IMeasurement>> measurements)
         {
             FileDataService fileService = new FileDataService();
             fileService.Store(measurements);

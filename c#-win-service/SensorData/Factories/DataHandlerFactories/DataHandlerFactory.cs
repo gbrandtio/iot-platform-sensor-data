@@ -1,7 +1,9 @@
-﻿using Interfaces;
+﻿using Handlers;
+using Interfaces;
 using ObjService;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -21,7 +23,11 @@ namespace DataHandlerFactories
         /// <returns>A concrete data handler object.</returns>
         public IDataHandler GetDataHandler(Type type)
         {
-            return Instantiator.GetObject(type, "Handlers.dll");
+            EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, "Object Type: " + type, EventLogEntryType.Information);
+            if (type == typeof(SensorDataHandler)) return new SensorDataHandler();
+            if (type == typeof(GeocodeDataHandler)) return new GeocodeDataHandler();
+            if (type == typeof(DataStorageHandler)) return new DataStorageHandler();
+            return null;
         }
     }
 }

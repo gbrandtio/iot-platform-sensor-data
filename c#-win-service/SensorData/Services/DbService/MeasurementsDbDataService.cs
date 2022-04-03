@@ -21,9 +21,9 @@ namespace Services.DbService
         /// Iterates through the dictionary and inserts all the different kinds of measurements into the database.
         /// </summary>
         /// <param name="measurements"></param>
-        public void Insert(Dictionary<Type,List<IMeasurement>> measurements)
+        public void Insert(Dictionary<string,List<IMeasurement>> measurements)
         {
-            foreach (KeyValuePair<Type, List<IMeasurement>> keyValuePair in measurements)
+            foreach (KeyValuePair<string, List<IMeasurement>> keyValuePair in measurements)
             {
                 dbContext.InsertMeasurement(keyValuePair.Key, keyValuePair.Value.ToList());
             }

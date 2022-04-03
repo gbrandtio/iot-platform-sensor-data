@@ -38,11 +38,11 @@ namespace Handlers
         /// </summary>
         /// <param name="allMeasurements">Dictionary with all the measurements in separate lists.</param>
         /// <returns></returns>
-        public Dictionary<Type, List<IMeasurement>> HandleData(Dictionary<Type, List<IMeasurement>> allMeasurements)
+        public Dictionary<string, List<IMeasurement>> HandleData(Dictionary<string, List<IMeasurement>> allMeasurements)
         {
-            foreach (KeyValuePair<Type, List<IMeasurement>> entry in allMeasurements)
+            foreach (KeyValuePair<string, List<IMeasurement>> entry in allMeasurements)
             {
-                Type measurementType = entry.Key;
+                string measurementType = entry.Key;
                 List<IMeasurement> measurements = entry.Value;
                 foreach(IMeasurement measurement in measurements)
                 {

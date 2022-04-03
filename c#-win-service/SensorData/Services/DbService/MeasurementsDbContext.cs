@@ -35,13 +35,13 @@ namespace Services.DbService
         /// </summary>
         /// <param name="type">The type of the measurement to be inserted.</param>
         /// <param name="list">The list that contains the data.</param>
-        public void InsertMeasurement(Type type, List<IMeasurement> list)
+        public void InsertMeasurement(string type, List<IMeasurement> list)
         {
-            if (type == typeof(Humidity)) this.Humidity.AddRange(list.OfType<Humidity>().ToList());
-            if (type == typeof(P1)) this.P1.AddRange(list.OfType<P1>().ToList());
-            if (type == typeof(P2)) this.P2.AddRange(list.OfType<P2>().ToList());
-            if (type == typeof(Pressure)) this.Pressure.AddRange(list.OfType<Pressure>().ToList());
-            if (type == typeof(Temperature)) this.Temperature.AddRange(list.OfType<Temperature>().ToList());
+            if (type == new Humidity().Name) this.Humidity.AddRange(list.OfType<Humidity>().ToList());
+            if (type == new P1().Name) this.P1.AddRange(list.OfType<P1>().ToList());
+            if (type == new P2().Name) this.P2.AddRange(list.OfType<P2>().ToList());
+            if (type == new Pressure().Name) this.Pressure.AddRange(list.OfType<Pressure>().ToList());
+            if (type == new Temperature().Name) this.Temperature.AddRange(list.OfType<Temperature>().ToList());
         }
 
         /// <summary>

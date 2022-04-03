@@ -59,6 +59,10 @@
       <Project>{D889581F-32DE-47CE-9638-825E75C8FDAD}</Project>
       <Name>Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Factories\MeasurementFactories\MeasurementFactories.csproj">
+      <Project>{CFFF4B2B-7433-476F-B127-9267C6FDD99D}</Project>
+      <Name>MeasurementFactories</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Factories\ServiceFactories\ServiceFactories.csproj">
       <Project>{2EC446CB-DE31-4AA0-9547-579B8E0843B7}</Project>
       <Name>ServiceFactories</Name>

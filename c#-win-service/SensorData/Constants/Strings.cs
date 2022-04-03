@@ -180,11 +180,11 @@ namespace Constants
             /// <summary>
             /// The configured interval.
             /// </summary>
-            public static Config TimerInterval { get { return new Config(R_TIMER_INTERVAL); } }
+            public static Config TimerInterval { get { return new Config(ConfigurationManager.AppSettings[R_TIMER_INTERVAL]); } }
             /// <summary>
             /// The configured data storage mode.
             /// </summary>
-            public static Config DataStorageMode { get { return new Config(R_DATA_STORAGE_MODE); } }
+            public static Config DataStorageMode { get { return new Config(ConfigurationManager.AppSettings[R_DATA_STORAGE_MODE]); } }
             /// <summary>
             /// The configured data storage method.
             /// </summary>

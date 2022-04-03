@@ -53,7 +53,7 @@ namespace SensorDataController
         public void Control()
         {
             // Get separate lists for each measurement type. Will help us store different measurement types to their respective tables.
-            Dictionary<Type, List<IMeasurement>> dicSeparatedMeasurements = SensorDataHandler.HandleData(new Dictionary<Type, List<IMeasurement>>());
+            Dictionary<string, List<IMeasurement>> dicSeparatedMeasurements = SensorDataHandler.HandleData(new Dictionary<string, List<IMeasurement>>());
 
             // Add the city info on each IMeasurement object.
             dicSeparatedMeasurements = GeocodeDataHandler.HandleData(dicSeparatedMeasurements);

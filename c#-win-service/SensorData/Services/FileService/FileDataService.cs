@@ -10,6 +10,7 @@ using CsvHelper;
 using System.Globalization;
 using Constants;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace Services.FileService
 {
@@ -41,10 +42,17 @@ namespace Services.FileService
         /// Stores all the data passed through the list into the appropriate file.
         /// </summary>
         /// <param name="measurements">A list of measurements to be stored.</param>
-        public void Store(Dictionary<Type, List<IMeasurement>> measurements)
+        public void Store(Dictionary<string, List<IMeasurement>> measurements)
         {
-            currentFilePath = CreateFile(Strings.Config.DataFilePath.Value);
-            Write(measurements, currentFilePath);
+            try
+            {
+                currentFilePath = CreateFile(Strings.Config.DataFilePath.Value);
+                Write(measurements, currentFilePath);
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, e.ToString(), EventLogEntryType.Error);
+            }
         }
 
         /// <summary>
@@ -68,6 +76,7 @@ namespace Services.FileService
             }
             catch (Exception e)
             {
+                EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, e.ToString(), EventLogEntryType.Error);
             }
             return logPath;
         }
@@ -98,6 +107,7 @@ namespace Services.FileService
             }
             catch (Exception e)
             {
+                EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, e.ToString(), EventLogEntryType.Error);
             }
             return isDataLogged;
         }
@@ -108,14 +118,14 @@ namespace Services.FileService
         /// <param name="measurements"></param>
         /// <param name="path"></param>
         /// <returns></returns>
-        public static bool Write(Dictionary<Type, List<IMeasurement>> measurements, string path)
+        public static bool Write(Dictionary<string, List<IMeasurement>> measurements, string path)
         {
             bool isDataLogged = false;
             try
             {
-                foreach (KeyValuePair<Type, List<IMeasurement>> measurement in measurements)
+                foreach (KeyValuePair<string, List<IMeasurement>> measurement in measurements)
                 {
-                    using (var writer = new StreamWriter(path))
+                    using (var writer = new StreamWriter(path, isAppendMode))
                     using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                     {
                         if (!isAppendMode)
@@ -131,6 +141,7 @@ namespace Services.FileService
             }
             catch (Exception e)
             {
+                EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, e.ToString(), EventLogEntryType.Error);
             }
             return isDataLogged;
         }

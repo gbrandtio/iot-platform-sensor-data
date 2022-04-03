@@ -1,5 +1,6 @@
 ﻿using Constants;
 using Interfaces;
+using MeasurementFactories;
 using Models;
 using Newtonsoft.Json.Linq;
 using ObjService;
@@ -8,6 +9,7 @@ using RestClient;
 using RestService;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -54,11 +56,21 @@ namespace Handlers
         /// </summary>
         /// <param name="unused">Argument in order to fulfil the IDataHandler interface.</param>
         /// <returns></returns>
-        public Dictionary<Type, List<IMeasurement>> HandleData(Dictionary<Type, List<IMeasurement>> unused)
+        public Dictionary<string, List<IMeasurement>> HandleData(Dictionary<string, List<IMeasurement>> unused)
         {
-            string sensorDataResponse = RetrieveSensorDataValues();
-            List<IMeasurement> allMeasurements = ExtractSensorDataValues(sensorDataResponse);
-            return GetSeparatedMeasurementLists(allMeasurements);
+            Dictionary<string, List<IMeasurement>> constructedDictionary = new Dictionary<string, List<IMeasurement>>();
+            try
+            {
+                string sensorDataResponse = RetrieveSensorDataValues();
+                List<IMeasurement> allMeasurements = ExtractSensorDataValues(sensorDataResponse);
+                constructedDictionary = GetSeparatedMeasurementLists(allMeasurements);
+            }
+            catch(Exception e)
+            {
+                EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, e.ToString(), EventLogEntryType.Error);
+            }
+
+            return constructedDictionary;
         }
         #endregion
 
@@ -71,7 +83,9 @@ namespace Handlers
         public string RetrieveSensorDataValues()
         {
             LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value, Severity.Info));
-            return GET.DoRequest(Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value);
+            string response = GET.DoRequest(Strings.Sensor.SensorApi.Value + Strings.Config.CountryCode.Value);
+            LogHandler.Log(new Log(MethodBase.GetCurrentMethod().Name, "Sensor API response: " + response, Severity.Info));
+            return response;
         }
 
         /// <summary>
@@ -89,11 +103,12 @@ namespace Handlers
                 foreach (JObject obj in jResultsArray)
                 {
                     ILocation location = ExtractLocationInfo(obj);
+                    Dictionary<string, double> measurementPairs = ExtractMeasurementJSONObjects(obj);
                     // Extract sensor data values
-                    foreach (KeyValuePair<string, double> pair in ExtractMeasurementJSONObjects(obj))
+                    foreach (KeyValuePair<string, double> pair in measurementPairs)
                     {
                         // Dynamically instantiate concrete object of IMeasurement.
-                        IMeasurement measurement = Instantiator.GetObject(pair.Key, "Models.dll", pair.Value, location);
+                        IMeasurement measurement = MeasurementsFactory.GetInstance(pair.Key, pair.Value, location);
                         measurements.Add(measurement);
                     }
                 }
@@ -160,14 +175,30 @@ namespace Handlers
         /// </summary>
         /// <param name="allMeasurements">List with different concrete objects of IMeasurement interface.</param>
         /// <returns>Dictionary of a concrete IMeasrement implementation.</returns>
-        public Dictionary<Type, List<IMeasurement>> GetSeparatedMeasurementLists(List<IMeasurement> allMeasurements)
+        public Dictionary<string, List<IMeasurement>> GetSeparatedMeasurementLists(List<IMeasurement> allMeasurements)
         {
-            // Construct each list
-            List<Type> types = Instantiator.GetTypes("Models.dll");
-            Dictionary<Type, List<IMeasurement>> dicSeparatedLists = new Dictionary<Type, List<IMeasurement>>();
-            foreach (Type type in types)
+            Dictionary<string, List<IMeasurement>> dicSeparatedLists = new Dictionary<string, List<IMeasurement>>();
+            try
             {
-                dicSeparatedLists.Add(type, GetSpecificMeasurementObjectList(allMeasurements, type));
+                // Find all measurement names.
+                Stack<string> types = new Stack<string>();
+                foreach (IMeasurement measurement in allMeasurements)
+                {
+                    if (measurement != null && !types.Contains(measurement.Name))
+                    {
+                        types.Push(measurement.Name);
+                    }
+                }
+
+                // Construct each list.
+                foreach (string type in types)
+                {
+                    dicSeparatedLists.Add(type, GetSpecificMeasurementObjectList(allMeasurements, type));
+                }
+            }
+            catch (Exception e)
+            {
+                EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, e.ToString(), EventLogEntryType.Error);
             }
             return dicSeparatedLists;
         }
@@ -178,15 +209,15 @@ namespace Handlers
         /// Given a type, returns all the objects inside a list that are a concrete implementation of this type.
         /// </summary>
         /// <param name="measurements">List of measurements to get objects from.</param>
-        /// <param name="type">Type of objects to add to the return list.</param>
+        /// <param name="measurementName">Type of objects to add to the return list.</param>
         /// <returns>List of objects with the specified type</returns>
-        private List<IMeasurement> GetSpecificMeasurementObjectList(List<IMeasurement> measurements, Type type)
+        private List<IMeasurement> GetSpecificMeasurementObjectList(List<IMeasurement> measurements, string measurementName)
         {
             List<IMeasurement> specificMeasurementObjectList = new List<IMeasurement>();
             foreach (IMeasurement measurement in measurements)
             {
                 if (measurement != null)
-                    if (type == measurement.GetType()) specificMeasurementObjectList.Add(measurement);
+                    if (measurementName == measurement.Name) specificMeasurementObjectList.Add(measurement);
             }
             return specificMeasurementObjectList;
         }

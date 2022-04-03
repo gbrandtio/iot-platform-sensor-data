@@ -77,9 +77,17 @@
       <Project>{D889581F-32DE-47CE-9638-825E75C8FDAD}</Project>
       <Name>Constants</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Controllers\SensorDataController\SensorDataController.csproj">
+      <Project>{a656eb29-fe52-436b-b759-985cf7905e97}</Project>
+      <Name>SensorDataController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Factories\SensorDataFactories\SensorDataFactories.csproj">
       <Project>{4d18f6e1-3e53-4c59-acbc-33fc308bb9bf}</Project>
       <Name>SensorDataFactories</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Handlers\Handlers.csproj">
+      <Project>{18E20006-07A4-4771-82B9-3738FFB21DFD}</Project>
+      <Name>Handlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Interfaces\Interfaces.csproj">
       <Project>{3CE1AE07-28A5-4A37-814B-274C799B01CE}</Project>

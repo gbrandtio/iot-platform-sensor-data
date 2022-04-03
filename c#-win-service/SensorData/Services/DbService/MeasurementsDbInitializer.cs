@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -27,7 +28,7 @@ namespace Services.DbService
             }
             catch (Exception e)
             {
-                FileService.FileDataService.Write(new Models.Log(MethodBase.GetCurrentMethod().Name, e.ToString(), Models.Severity.Exception));
+                EventLog.WriteEntry(MethodBase.GetCurrentMethod().Name, e.ToString(), EventLogEntryType.Error);
             }
         }
     }

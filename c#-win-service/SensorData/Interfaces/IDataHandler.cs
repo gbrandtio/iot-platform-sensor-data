@@ -16,6 +16,6 @@ namespace Interfaces
         /// </summary>
         /// <param name="dictionary">The data that need to be handled</param>
         /// <returns>The transformed data.</returns>
-        Dictionary<Type, List<IMeasurement>> HandleData(Dictionary<Type, List<IMeasurement>> dictionary);
+        Dictionary<string, List<IMeasurement>> HandleData(Dictionary<string, List<IMeasurement>> dictionary);
     }
 }
