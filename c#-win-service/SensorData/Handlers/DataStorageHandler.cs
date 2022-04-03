@@ -38,7 +38,7 @@ namespace Handlers
         {
             try
             {
-                MethodInfo methodInfo = typeof(DataStorageHandler).GetMethod(activeStorageMethod.Value
+                MethodInfo methodInfo = typeof(DataStorageHandler).GetMethod(Strings.Config.DataStorageMode.Value
                     , BindingFlags.Instance | BindingFlags.NonPublic, null, new Type[] { typeof(Dictionary<Type, List<IMeasurement>>) }, null);
                 methodInfo.Invoke(this, new object[] { measurements });
             }
