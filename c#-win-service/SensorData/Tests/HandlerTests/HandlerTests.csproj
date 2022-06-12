@@ -88,10 +88,6 @@
       <Project>{d889581f-32de-47ce-9638-825e75c8fdad}</Project>
       <Name>Constants</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Handlers\Handlers.csproj">
-      <Project>{18e20006-07a4-4771-82b9-3738ffb21dfd}</Project>
-      <Name>Handlers</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Interfaces\Interfaces.csproj">
       <Project>{3ce1ae07-28a5-4a37-814b-274c799b01ce}</Project>
       <Name>Interfaces</Name>
