@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29519.87
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorData", "SensorData\SensorData.csproj", "{8F9143CA-3BD0-4E32-A781-BD6E27238852}"
 EndProject
@@ -30,6 +30,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Factories", "Factories", "{B9CADCE6-4864-400D-9248-1CF1AFB98DE5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandlerFactories", "Factories\DataHandlerFactories\DataHandlerFactories.csproj", "{7A0C9A2F-3167-43A8-83C7-F77B738C3E8A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{18E20006-07A4-4771-82B9-3738FFB21DFD} = {18E20006-07A4-4771-82B9-3738FFB21DFD}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SensorDataFactories", "Factories\SensorDataFactories\SensorDataFactories.csproj", "{4D18F6E1-3E53-4C59-ACBC-33FC308BB9BF}"
 EndProject
