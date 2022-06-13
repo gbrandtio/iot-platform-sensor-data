@@ -32,6 +32,10 @@
     <DocumentationFile>bin\Release\DataHandlerFactories.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Handlers, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\SensorData\bin\Release\Handlers.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
